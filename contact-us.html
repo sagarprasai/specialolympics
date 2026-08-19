@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact Us - Special Olympics Nepal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-container": "#f7feff",
+                      "surface-variant": "#e0e3e6",
+                      "tertiary-fixed": "#e5e2e1",
+                      "background": "#f7f9fc",
+                      "secondary-fixed": "#dae2ff",
+                      "on-primary-container": "#fffcff",
+                      "error": "#ba1a1a",
+                      "secondary": "#495d91",
+                      "surface-container-lowest": "#ffffff",
+                      "outline-variant": "#e6bdbb",
+                      "primary-fixed-dim": "#ffb3b1",
+                      "primary": "#bb0027",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed-dim": "#c8c6c5",
+                      "primary-fixed": "#ffdad8",
+                      "on-primary-fixed-variant": "#92001c",
+                      "secondary-fixed-dim": "#b2c5ff",
+                      "on-surface": "#191c1e",
+                      "on-surface-variant": "#5d3f3e",
+                      "error-container": "#ffdad6",
+                      "surface-container-highest": "#e0e3e6",
+                      "on-secondary-fixed": "#001847",
+                      "primary-container": "#e51937",
+                      "on-background": "#191c1e",
+                      "surface-bright": "#f7f9fc",
+                      "outline": "#926e6d",
+                      "on-secondary-fixed-variant": "#304578",
+                      "on-tertiary-fixed": "#1c1b1b",
+                      "secondary-container": "#aec2fe",
+                      "inverse-primary": "#ffb3b1",
+                      "surface-container-low": "#f2f4f7",
+                      "on-secondary-container": "#3b4f82",
+                      "tertiary-container": "#757474",
+                      "surface-dim": "#d8dadd",
+                      "tertiary": "#5d5c5b",
+                      "on-primary-fixed": "#410007",
+                      "surface-container": "#eceef1",
+                      "on-error": "#ffffff",
+                      "surface": "#f7f9fc",
+                      "surface-container-high": "#e6e8eb",
+                      "inverse-on-surface": "#eff1f4",
+                      "surface-tint": "#bf0028",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#2d3133",
+                      "on-tertiary-fixed-variant": "#474746"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "section-padding-mobile": "64px",
+                      "margin-desktop": "80px",
+                      "stack-md": "16px",
+                      "container-max-width": "1280px",
+                      "section-padding-desktop": "120px",
+                      "gutter": "32px",
+                      "stack-sm": "8px",
+                      "stack-lg": "24px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Merriweather", "serif"],
+                      "label-md": ["Raleway", "sans-serif"],
+                      "cta": ["Raleway", "sans-serif"],
+                      "headline-xl": ["Raleway", "sans-serif"],
+                      "eyebrow": ["Raleway", "sans-serif"],
+                      "headline-lg": ["Raleway", "sans-serif"],
+                      "body-md": ["Merriweather", "serif"],
+                      "headline-md": ["Raleway", "sans-serif"],
+                      "headline-xl-mobile": ["Raleway", "sans-serif"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "cta": ["16px", {"lineHeight": "1.0", "fontWeight": "700"}],
+                      "headline-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "eyebrow": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                      "headline-lg": ["40px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                      "headline-xl-mobile": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "800"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .premium-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+        }
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.08);
+        }
+        .card-border {
+            border: 1px solid #E2E8F0;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface border-b border-outline-variant shadow-sm w-full top-0 z-50 sticky transition-all duration-300">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-[1920px] mx-auto">
+<a href="index.html" class="flex items-center gap-3 flex-shrink-0">
+<img alt="Special Olympics Nepal" class="h-10 md:h-12 w-auto object-contain" src="assets/images/logo_special_olympics.svg"/>
+</a>
+<div class="flex items-center justify-end flex-grow gap-8">
+<nav class="hidden lg:flex items-center gap-8">
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-surface-container-low px-3 py-2 rounded-md ease-in-out whitespace-nowrap" href="index.html">Home</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-surface-container-low px-3 py-2 rounded-md ease-in-out whitespace-nowrap" href="healthy-athletes-program.html">Programs</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-surface-container-low px-3 py-2 rounded-md ease-in-out whitespace-nowrap" href="news-article.html">Stories & News</a>
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1 whitespace-nowrap font-bold" href="contact-us.html">Contact Us</a>
+</nav>
+<div class="flex items-center gap-6">
+<button aria-label="Search" class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">search</span>
+</button>
+<button class="font-label-md text-label-md text-secondary hover:text-primary transition-colors whitespace-nowrap">नेपाली / EN</button>
+<a class="bg-primary hover:bg-primary-container text-white font-cta text-cta px-6 py-3 rounded-DEFAULT transition-colors uppercase tracking-wider flex items-center gap-2 whitespace-nowrap" href="contact-us.html">
+                        DONATE <span class="material-symbols-outlined text-sm">favorite</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow">
+<!-- Contact Hero Section -->
+<section class="px-margin-desktop py-section-padding-desktop max-w-container-max-width mx-auto">
+<div class="max-w-3xl">
+<span class="font-eyebrow text-eyebrow text-primary uppercase mb-stack-md block tracking-[0.1em]">GET IN TOUCH</span>
+<h1 class="font-headline-xl text-headline-xl text-on-secondary-fixed mb-stack-lg">Contact Special Olympics Nepal</h1>
+<p class="font-body-lg text-body-lg text-secondary">Have a question, want to get involved, or would like to learn more about our work? We would be happy to hear from you.</p>
+</div>
+</section>
+<!-- Contact Main Content (Two-Column) -->
+<section class="px-margin-desktop pb-section-padding-desktop max-w-container-max-width mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- LEFT: Contact Info -->
+<div class="md:col-span-5 flex flex-col gap-stack-lg pr-gutter">
+<h2 class="font-headline-md text-headline-md text-on-secondary-fixed mb-stack-sm">Let's Connect</h2>
+<div class="flex items-start gap-stack-md">
+<span class="material-symbols-outlined text-primary mt-1" style="font-variation-settings: 'FILL' 0;">business</span>
+<div>
+<span class="font-label-md text-label-md text-secondary block">Office</span>
+<span class="font-body-md text-body-md text-on-surface">Special Olympics Nepal</span>
+</div>
+</div>
+<div class="flex items-start gap-stack-md">
+<span class="material-symbols-outlined text-primary mt-1" style="font-variation-settings: 'FILL' 0;">mail</span>
+<div>
+<span class="font-label-md text-label-md text-secondary block">Email</span>
+<a class="font-body-md text-body-md text-on-surface hover:text-primary transition-colors block" href="mailto:info@specialolympicsnepal.org">info@specialolympicsnepal.org</a>
+</div>
+</div>
+<div class="flex items-start gap-stack-md">
+<span class="material-symbols-outlined text-primary mt-1" style="font-variation-settings: 'FILL' 0;">call</span>
+<div>
+<span class="font-label-md text-label-md text-secondary block">Phone</span>
+<a class="font-body-md text-body-md text-on-surface hover:text-primary transition-colors block" href="tel:+97714XXXXXX">+977 1 4XXXXXX</a>
+</div>
+</div>
+<div class="flex items-start gap-stack-md">
+<span class="material-symbols-outlined text-primary mt-1" style="font-variation-settings: 'FILL' 0;">location_on</span>
+<div>
+<span class="font-label-md text-label-md text-secondary block">Address</span>
+<span class="font-body-md text-body-md text-on-surface block">Central Office, Bagbazar,<br/>Kathmandu, Nepal</span>
+</div>
+</div>
+</div>
+<!-- RIGHT: Contact Form -->
+<div class="md:col-span-7 bg-surface-container-lowest p-gutter rounded-xl card-border premium-shadow">
+<div class="mb-stack-lg">
+<h2 class="font-headline-md text-headline-md text-on-secondary-fixed mb-stack-sm">Send Us a Message</h2>
+<p class="font-body-md text-body-md text-secondary">Complete the form and our team will get back to you.</p>
+</div>
+<form class="space-y-stack-md">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div>
+<label class="font-label-md text-label-md text-on-surface block mb-2" for="name">Name *</label>
+<input class="w-full border border-surface-dim rounded-lg p-4 font-body-md focus:border-secondary focus:ring-2 focus:ring-secondary-fixed transition-all" id="name" required="" type="text"/>
+</div>
+<div>
+<label class="font-label-md text-label-md text-on-surface block mb-2" for="email">Email Address *</label>
+<input class="w-full border border-surface-dim rounded-lg p-4 font-body-md focus:border-secondary focus:ring-2 focus:ring-secondary-fixed transition-all" id="email" required="" type="email"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div>
+<label class="font-label-md text-label-md text-on-surface block mb-2" for="phone">Phone Number (Optional)</label>
+<input class="w-full border border-surface-dim rounded-lg p-4 font-body-md focus:border-secondary focus:ring-2 focus:ring-secondary-fixed transition-all" id="phone" type="tel"/>
+</div>
+<div>
+<label class="font-label-md text-label-md text-on-surface block mb-2" for="subject">Subject *</label>
+<select class="w-full border border-surface-dim rounded-lg p-4 font-body-md focus:border-secondary focus:ring-2 focus:ring-secondary-fixed transition-all bg-white" id="subject" required="">
+<option disabled="" selected="" value="">Select a subject</option>
+<option value="General Inquiry">General Inquiry</option>
+<option value="Volunteer">Volunteer</option>
+<option value="Donation">Donation</option>
+<option value="Partnership">Partnership</option>
+<option value="Media">Media</option>
+<option value="Programme Information">Programme Information</option>
+<option value="Other">Other</option>
+</select>
+</div>
+</div>
+<div>
+<label class="font-label-md text-label-md text-on-surface block mb-2" for="message">Message *</label>
+<textarea class="w-full border border-surface-dim rounded-lg p-4 font-body-md focus:border-secondary focus:ring-2 focus:ring-secondary-fixed transition-all" id="message" required="" rows="5"></textarea>
+</div>
+<div class="pt-stack-sm">
+<button class="bg-primary text-on-primary font-cta text-cta px-8 py-4 rounded-full hover:bg-primary-container transition-colors flex items-center uppercase tracking-wide w-full md:w-auto justify-center" type="submit">
+                                SEND MESSAGE
+                                <span class="material-symbols-outlined ml-2 text-[20px]" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</section>
+<!-- Location Section -->
+<section class="bg-surface-container-low py-section-padding-desktop">
+<div class="px-margin-desktop max-w-container-max-width mx-auto">
+<div class="text-center mb-stack-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-secondary-fixed mb-stack-sm">Find Us</h2>
+<p class="font-body-lg text-body-lg text-secondary">Central Office, Bagbazar, Kathmandu, Nepal</p>
+</div>
+<div class="w-full h-96 bg-surface-dim rounded-xl overflow-hidden card-border premium-shadow relative flex items-center justify-center">
+<!-- Map Placeholder -->
+<img class="w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A clean, minimalist map centered on Bagbazar, Kathmandu, Nepal. The map uses a light color palette with soft greys and subtle blue tones for roads and landmarks. A striking red location pin marks the central office. The overall aesthetic is modern, accessible, and aligns with a professional corporate design." data-location="Kathmandu" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc2dtuAUB5G3Po7XpDNGSORezrdA2XpROJV2E0Y-vKiMSE9aRyIK6XgYMbOcfwDZ6OfV8pQgnS2f6WzUWBKZA1sNg-XErnYqZhxTMn-wh8HqGcVqpXP8L0Eo48RSkRglragarKfB5V_YqS0LUMIQ0NNfuVskO2OSQCINjQ0yMBAYtz2JjNbKRCQIdyAb0T19mRrPNprUWYVhPv7LL7qIN9jIi3ml3Sj5ScXYJ4adNN92nfFdsCtUFd"/>
+</div>
+</div>
+</section>
+<!-- Get Involved CTA -->
+<section class="py-section-padding-desktop bg-on-secondary-fixed relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at right top, var(--tw-colors-primary) 0%, transparent 50%);"></div>
+<div class="px-margin-desktop max-w-container-max-width mx-auto text-center relative z-10">
+<h2 class="font-headline-lg text-headline-lg text-surface-bright mb-stack-md">Looking for ways to get involved?</h2>
+<p class="font-body-lg text-body-lg text-secondary-fixed-dim max-w-2xl mx-auto mb-stack-lg">You can support Special Olympics Nepal by volunteering, donating or partnering with us to create a more inclusive world.</p>
+<button class="bg-primary text-on-primary font-cta text-cta px-8 py-4 rounded-full hover:bg-primary-container transition-all hover:scale-105 flex items-center uppercase tracking-wide mx-auto">
+                    GET INVOLVED
+                    <span class="material-symbols-outlined ml-2 text-[20px]" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#001847] border-t border-outline-variant/20 w-full bottom-0 text-white">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 px-margin-desktop py-section-padding-desktop max-w-container-max-width mx-auto">
+<div class="lg:col-span-2 pr-8">
+<a class="flex items-center gap-4 mb-8 w-56 h-auto brightness-0 invert" href="index.html">
+    <img alt="Special Olympics Nepal" class="h-10 md:h-12 w-auto object-contain" src="assets/images/logo_special_olympics.svg"/>
+</a>
+<p class="font-body-lg text-surface-variant/80 mb-10 max-w-md leading-relaxed">Creating a world of inclusion through the power of sports for people with intellectual disabilities across Nepal.</p>
+<div class="flex gap-4">
+<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">public</span></a>
+<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">photo_camera</span></a>
+<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">video_library</span></a>
+</div>
+</div>
+<div>
+<h4 class="font-label-md text-lg text-white font-bold mb-8 uppercase tracking-widest opacity-90">What We Do</h4>
+<ul class="space-y-5">
+<li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="healthy-athletes-program.html">Healthy Athletes®</a></li>
+<li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="index.html#programs">Programs</a></li>
+<li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="index.html#sports">Sports</a></li>
+<li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="news-article.html">Stories & News</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-lg text-white font-bold mb-8 uppercase tracking-widest opacity-90">Get Involved</h4>
+<ul class="space-y-5">
+<li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="contact-us.html">Volunteer</a></li>
+<li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="contact-us.html">Donate</a></li>
+<li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="contact-us.html">Fundraise</a></li>
+<li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="contact-us.html">Partner With Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-lg text-white font-bold mb-8 uppercase tracking-widest opacity-90">Stay Connected</h4>
+<form class="flex flex-col gap-5">
+<input aria-label="Email Address" class="bg-white/10 border border-white/20 rounded-lg px-5 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-lg w-full transition-all" placeholder="Enter your email" type="email">
+<button class="bg-[#bb0027] hover:bg-[#e51937] text-white font-cta text-lg px-8 py-4 rounded-lg transition-colors uppercase tracking-widest text-center w-full font-bold shadow-md" type="submit">SUBSCRIBE</button>
+</form>
+</div>
+</div>
+<div class="bg-black/20 py-8 px-margin-desktop border-t border-white/10">
+<div class="max-w-container-max-width mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="font-body-md text-surface-variant/60">© 2025 Special Olympics Nepal. All rights reserved.</p>
+<div class="flex gap-10">
+<a class="font-body-md text-surface-variant/60 hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-md text-surface-variant/60 hover:text-white transition-colors" href="#">Terms of Use</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
