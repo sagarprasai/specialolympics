@@ -103,56 +103,125 @@
             }
         }
     </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Mobile menu hamburger animation styles */
+        .hamburger-icon span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: currentColor;
+            transition: all 0.3s ease-in-out;
+        }
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 16px;
+            width: 24px;
+            cursor: pointer;
+        }
+        .hamburger-icon.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger-icon.open span:nth-child(2) {
+            opacity: 0;
+            transform: scale(0);
+        }
+        .hamburger-icon.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+    </style>
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
 <!-- TopNavBar -->
 <header class="bg-surface border-b border-outline-variant shadow-sm w-full top-0 z-50 sticky transition-all duration-300">
-<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-[1920px] mx-auto">
+<div class="flex justify-between items-center w-full px-6 lg:px-margin-desktop py-4 max-w-[1920px] mx-auto">
 <a href="index.html" class="flex items-center gap-3 flex-shrink-0">
-<img alt="Special Olympics Nepal" class="h-10 md:h-12 w-auto object-contain" src="assets/images/logo_special_olympics.svg"/>
+<img alt="Special Olympics Nepal" class="h-9 sm:h-10 md:h-12 w-auto object-contain" src="assets/images/logo_special_olympics.svg"/>
 </a>
-<div class="flex items-center justify-end flex-grow gap-8">
-<nav class="hidden lg:flex items-center gap-8">
+<div class="flex items-center justify-end flex-grow gap-4 lg:gap-8">
+<nav class="hidden lg:flex items-center gap-6 xl:gap-8">
 <a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1 whitespace-nowrap font-bold" href="index.html">Home</a>
 <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-surface-container-low px-3 py-2 rounded-md ease-in-out whitespace-nowrap" href="healthy-athletes-program.html">Programs</a>
 <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-surface-container-low px-3 py-2 rounded-md ease-in-out whitespace-nowrap" href="news-article.html">Stories & News</a>
 <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-surface-container-low px-3 py-2 rounded-md ease-in-out whitespace-nowrap" href="contact-us.html">Contact Us</a>
 </nav>
-<div class="flex items-center gap-6">
-<button aria-label="Search" class="text-secondary hover:text-primary transition-colors">
+<div class="flex items-center gap-3 md:gap-6">
+<button aria-label="Search" class="hidden sm:flex text-secondary hover:text-primary transition-colors">
 <span class="material-symbols-outlined text-xl">search</span>
 </button>
-<button class="font-label-md text-label-md text-secondary hover:text-primary transition-colors whitespace-nowrap">नेपाली / EN</button>
-<a class="bg-primary hover:bg-primary-container text-white font-cta text-cta px-6 py-3 rounded-DEFAULT transition-colors uppercase tracking-wider flex items-center gap-2 whitespace-nowrap" href="contact-us.html">
+<button class="hidden sm:flex font-label-md text-label-md text-secondary hover:text-primary transition-colors whitespace-nowrap">नेपाली / EN</button>
+<a class="bg-primary hover:bg-primary-container text-white font-cta text-cta px-4 py-2 sm:px-6 sm:py-3 rounded-DEFAULT transition-colors uppercase tracking-wider flex items-center gap-2 whitespace-nowrap text-sm sm:text-base" href="contact-us.html">
                         DONATE <span class="material-symbols-outlined text-sm">favorite</span>
 </a>
+<button id="mobile-menu-trigger" aria-label="Toggle Menu" class="lg:hidden text-secondary hover:text-primary p-2 focus:outline-none relative w-10 h-10 flex items-center justify-center">
+<div class="hamburger-icon flex flex-col justify-between w-6 h-4 transition-transform duration-300">
+<span class="w-full h-0.5 bg-current transition-all duration-300 origin-left"></span>
+<span class="w-full h-0.5 bg-current transition-all duration-300"></span>
+<span class="w-full h-0.5 bg-current transition-all duration-300 origin-left"></span>
+</div>
+</button>
+</div>
+</div>
+</div>
+<!-- Mobile Drawer -->
+<div id="mobile-drawer" class="fixed inset-0 z-40 lg:hidden pointer-events-none transition-all duration-300 opacity-0">
+<div id="mobile-drawer-backdrop" class="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+<div id="mobile-drawer-content" class="absolute right-0 top-0 bottom-0 w-[300px] max-w-[85vw] bg-surface border-l border-outline-variant/30 flex flex-col p-6 shadow-2xl transition-transform duration-300 translate-x-full">
+<div class="flex justify-between items-center mb-8 border-b border-outline-variant/30 pb-4">
+<span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest font-bold">Menu</span>
+<button id="mobile-drawer-close" aria-label="Close Menu" class="text-secondary hover:text-primary p-2">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<nav class="flex flex-col gap-4 mb-8">
+<a class="font-label-md text-lg text-primary border-l-4 border-primary pl-4 py-2 font-bold bg-primary/5" href="index.html">Home</a>
+<a class="font-label-md text-lg text-secondary hover:text-primary hover:bg-surface-container-low px-4 py-2 rounded-md transition-all" href="healthy-athletes-program.html">Programs</a>
+<a class="font-label-md text-lg text-secondary hover:text-primary hover:bg-surface-container-low px-4 py-2 rounded-md transition-all" href="news-article.html">Stories & News</a>
+<a class="font-label-md text-lg text-secondary hover:text-primary hover:bg-surface-container-low px-4 py-2 rounded-md transition-all" href="contact-us.html">Contact Us</a>
+</nav>
+<div class="flex flex-col gap-6 mt-auto pt-6 border-t border-outline-variant/30">
+<div class="relative w-full">
+<input aria-label="Search" class="w-full bg-surface-container-low border border-outline-variant rounded-lg pl-10 pr-4 py-3 text-on-surface font-body-md placeholder-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Search..." type="text">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">search</span>
+</div>
+<button class="font-label-md text-label-md text-secondary hover:text-primary transition-colors py-2.5 flex items-center justify-center gap-2 border border-outline-variant rounded-lg">
+<span class="material-symbols-outlined text-lg">language</span>
+नेपाली / EN
+</button>
 </div>
 </div>
 </div>
 </header>
 <main>
 <!-- Hero Section -->
-<section class="relative w-full h-[90vh] min-h-[700px] flex items-center bg-[#00102e] overflow-hidden">
+<section class="relative w-full h-[80vh] min-h-[500px] sm:h-[90vh] sm:min-h-[700px] flex items-center bg-[#00102e] overflow-hidden">
 <div class="absolute inset-0 z-0">
 <img class="w-full h-full object-cover object-center brightness-90 contrast-105 filter" alt="Nepali Special Olympics wheelchair athlete competing with determination on the track" data-alt="A determined Nepali Special Olympics athlete competing with intense focus in a wheelchair race on a stadium track in front of cheering crowds." src="assets/images/hero_image.jpg">
 <!-- Filmic Dark Gradient Overlays -->
 <div class="absolute inset-0 bg-gradient-to-r from-[#000e28]/95 via-[#000e28]/75 to-transparent w-full md:w-3/4"></div>
 <div class="absolute inset-0 bg-gradient-to-t from-[#000e28]/90 via-transparent to-[#000e28]/40 pointer-events-none"></div>
 </div>
-<div class="relative z-10 w-full max-w-[1920px] mx-auto px-margin-desktop">
+<div class="relative z-10 w-full max-w-[1920px] mx-auto px-6 lg:px-margin-desktop">
 <div class="max-w-3xl">
 <span class="font-eyebrow text-eyebrow text-[#ff6b81] uppercase mb-4 block tracking-[0.25em] font-bold">Inclusion Revolution</span>
-<h1 class="font-headline-xl text-headline-xl text-white mb-8 leading-tight drop-shadow-md">
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-white mb-6 md:mb-8 leading-tight drop-shadow-md">
                         Inclusion Revolution in the Land of the <span class="text-[#ff3b5c]">Himalayas.</span>
 </h1>
-<p class="font-body-lg text-body-lg text-white/90 mb-12 max-w-2xl leading-relaxed text-shadow-sm">
+<p class="font-body-lg text-body-md md:text-body-lg text-white/90 mb-6 md:mb-12 max-w-2xl leading-relaxed text-shadow-sm">
                         We create a world of inclusion through the power of sports for people with intellectual disabilities across Nepal.
                     </p>
-<div class="flex flex-wrap gap-4">
-<a class="bg-primary hover:bg-primary-container text-white font-cta text-cta px-10 py-5 rounded-DEFAULT transition-all duration-300 uppercase tracking-wider flex items-center gap-2 shadow-xl hover:shadow-2xl hover:scale-105" href="contact-us.html">
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="bg-primary hover:bg-primary-container text-white font-cta text-cta px-6 py-4 sm:px-10 sm:py-5 rounded-DEFAULT transition-all duration-300 uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl hover:scale-105 w-full sm:w-auto text-center" href="contact-us.html">
                             GET INVOLVED <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
-<a class="border-2 border-white/40 hover:border-white text-white font-cta text-cta px-8 py-5 rounded-DEFAULT backdrop-blur-sm bg-white/10 hover:bg-white/20 transition-all uppercase tracking-wider flex items-center gap-2" href="healthy-athletes-program.html">
+<a class="border-2 border-white/40 hover:border-white text-white font-cta text-cta px-6 py-4 sm:px-8 sm:py-5 rounded-DEFAULT backdrop-blur-sm bg-white/10 hover:bg-white/20 transition-all uppercase tracking-wider flex items-center justify-center gap-2 w-full sm:w-auto text-center" href="healthy-athletes-program.html">
                             OUR PROGRAMS <span class="material-symbols-outlined text-sm">explore</span>
 </a>
 </div>
@@ -160,19 +229,19 @@
 </div>
 </section>
 <!-- Athlete's Oath -->
-<section class="bg-surface-container-low py-20 border-y border-outline-variant relative overflow-hidden">
+<section class="bg-surface-container-low py-12 md:py-20 border-y border-outline-variant relative overflow-hidden">
 <div class="absolute right-0 top-0 bottom-0 w-1/3 opacity-5 pointer-events-none">
 <span class="material-symbols-outlined text-[250px] absolute -right-10 top-1/2 -translate-y-1/2" style="font-variation-settings: &quot;FILL&quot; 1;">groups</span>
 </div>
-<div class="max-w-container-max-width mx-auto px-margin-desktop flex flex-col md:flex-row items-center justify-center gap-12 relative z-10">
+<div class="max-w-container-max-width mx-auto px-6 lg:px-margin-desktop flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 relative z-10">
 <div class="flex-shrink-0 text-primary">
 <span class="material-symbols-outlined text-8xl opacity-80" style="font-variation-settings: &quot;FILL&quot; 1;">format_quote</span>
 </div>
 <div class="flex-grow max-w-4xl text-center md:text-left">
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6 leading-tight italic">
+<h2 class="font-headline-lg text-2xl md:text-3xl lg:text-headline-lg text-on-surface mb-6 leading-tight italic">
                         “Let me win. But if I cannot win, let me be brave in the attempt.”
                     </h2>
-<div class="md:border-l-4 border-primary md:pl-6 inline-block text-left">
+<div class="border-l-4 border-primary pl-4 md:pl-6 inline-block text-left">
 <span class="font-eyebrow text-eyebrow text-primary uppercase block mb-2 tracking-widest">THE ATHLETE'S OATH</span>
 <span class="font-body-lg text-body-lg text-on-surface-variant font-medium">Special Olympics</span>
 </div>
@@ -180,10 +249,10 @@
 </div>
 </section>
 <!-- Programs -->
-<section class="py-section-padding-desktop px-margin-desktop max-w-container-max-width mx-auto">
-<div class="text-center mb-20">
+<section class="py-section-padding-mobile md:py-section-padding-desktop px-6 lg:px-margin-desktop max-w-container-max-width mx-auto">
+<div class="text-center mb-10 md:mb-20">
 <span class="font-eyebrow text-eyebrow text-primary uppercase block mb-4 tracking-widest">WHAT WE DO</span>
-<h2 class="font-headline-xl text-5xl text-on-surface mb-6">Programs That Change Lives</h2>
+<h2 class="font-headline-xl text-3xl md:text-5xl text-on-surface mb-6">Programs That Change Lives</h2>
 <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mx-auto">Year-round sports, health, and education programs for athletes of all ages and abilities.</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
@@ -195,9 +264,9 @@
 <span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: &quot;FILL&quot; 1;">sprint</span>
 </div>
 </div>
-<div class="p-10 pt-16 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-3xl text-on-surface mb-4">Sports</h3>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 flex-grow">Year-round training and competition in a variety of Olympic-type sports.</p>
+<div class="p-6 pt-12 sm:p-8 sm:pt-14 lg:p-10 lg:pt-16 flex flex-col flex-grow">
+<h3 class="font-headline-lg text-2xl lg:text-3xl text-on-surface mb-4">Sports</h3>
+<p class="font-body-lg text-body-md lg:text-body-lg text-on-surface-variant mb-8 flex-grow">Year-round training and competition in a variety of Olympic-type sports.</p>
 <a class="font-label-md text-label-md text-primary hover:text-primary-container flex items-center gap-2 uppercase tracking-widest font-bold mt-auto" href="#">
                             EXPLORE SPORTS <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
@@ -211,9 +280,9 @@
 <span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: &quot;FILL&quot; 1;">monitor_heart</span>
 </div>
 </div>
-<div class="p-10 pt-16 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-3xl text-on-surface mb-4">Healthy Athletes®</h3>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 flex-grow">Free health screenings and education for our athletes.</p>
+<div class="p-6 pt-12 sm:p-8 sm:pt-14 lg:p-10 lg:pt-16 flex flex-col flex-grow">
+<h3 class="font-headline-lg text-2xl lg:text-3xl text-on-surface mb-4">Healthy Athletes®</h3>
+<p class="font-body-lg text-body-md lg:text-body-lg text-on-surface-variant mb-8 flex-grow">Free health screenings and education for our athletes.</p>
 <a class="font-label-md text-label-md text-secondary hover:text-secondary-container flex items-center gap-2 uppercase tracking-widest font-bold mt-auto" href="#">
                             LEARN MORE <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
@@ -227,9 +296,9 @@
 <span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: &quot;FILL&quot; 1;">child_care</span>
 </div>
 </div>
-<div class="p-10 pt-16 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-3xl text-on-surface mb-4">Young Athletes</h3>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 flex-grow">Sports and play for children ages 2-7 and their families.</p>
+<div class="p-6 pt-12 sm:p-8 sm:pt-14 lg:p-10 lg:pt-16 flex flex-col flex-grow">
+<h3 class="font-headline-lg text-2xl lg:text-3xl text-on-surface mb-4">Young Athletes</h3>
+<p class="font-body-lg text-body-md lg:text-body-lg text-on-surface-variant mb-8 flex-grow">Sports and play for children ages 2-7 and their families.</p>
 <a class="font-label-md text-label-md text-[#2e7d32] hover:opacity-80 flex items-center gap-2 uppercase tracking-widest font-bold mt-auto" href="#">
                             LEARN MORE <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
@@ -243,9 +312,9 @@
 <span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: &quot;FILL&quot; 1;">diversity_3</span>
 </div>
 </div>
-<div class="p-10 pt-16 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-3xl text-on-surface mb-4">Unified Sports®</h3>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 flex-grow">Playing together. Building friendships. Changing attitudes.</p>
+<div class="p-6 pt-12 sm:p-8 sm:pt-14 lg:p-10 lg:pt-16 flex flex-col flex-grow">
+<h3 class="font-headline-lg text-2xl lg:text-3xl text-on-surface mb-4">Unified Sports®</h3>
+<p class="font-body-lg text-body-md lg:text-body-lg text-on-surface-variant mb-8 flex-grow">Playing together. Building friendships. Changing attitudes.</p>
 <a class="font-label-md text-label-md text-[#7b1fa2] hover:opacity-80 flex items-center gap-2 uppercase tracking-widest font-bold mt-auto" href="#">
                             LEARN MORE <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
@@ -254,109 +323,109 @@
 </div>
 </section>
 <!-- Impact Section -->
-<section class="py-section-padding-desktop px-margin-desktop bg-white relative overflow-hidden">
+<section class="py-section-padding-mobile md:py-section-padding-desktop px-6 lg:px-margin-desktop bg-white relative overflow-hidden">
 <div class="absolute bottom-0 right-0 opacity-5 pointer-events-none w-2/3 max-h-full">
 <svg class="w-full h-auto text-on-secondary-fixed fill-current" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 100 L20 60 L40 80 L70 20 L100 70 L100 100 Z"></path>
 </svg>
 </div>
 <div class="max-w-container-max-width mx-auto relative z-10">
-<div class="mb-20 text-center">
+<div class="mb-10 md:mb-20 text-center">
 <span class="font-eyebrow text-eyebrow text-primary uppercase block mb-4 tracking-widest">OUR IMPACT</span>
-<h2 class="font-headline-xl text-5xl text-on-secondary-fixed mb-6">Creating Impact Across Nepal</h2>
+<h2 class="font-headline-xl text-3xl md:text-5xl text-on-secondary-fixed mb-6">Creating Impact Across Nepal</h2>
 <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mx-auto">Together, we are building a more inclusive and healthier Nepal.</p>
 </div>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-12 lg:gap-20 divide-x divide-outline-variant/30">
-<div class="flex flex-col items-center text-center px-6">
-<span class="material-symbols-outlined text-primary text-6xl mb-8" style="font-variation-settings: &quot;FILL&quot; 0;">groups</span>
-<span class="font-headline-xl text-6xl text-on-secondary-fixed font-black mb-4">5,139+</span>
-<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Athletes<br>Registered</span>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 lg:gap-20 divide-x-0 md:divide-x divide-outline-variant/30">
+<div class="flex flex-col items-center text-center px-2 md:px-6">
+<span class="material-symbols-outlined text-primary text-5xl md:text-6xl mb-4 md:mb-8" style="font-variation-settings: &quot;FILL&quot; 0;">groups</span>
+<span class="font-headline-xl text-4xl sm:text-5xl lg:text-6xl text-on-secondary-fixed font-black mb-4">5,139+</span>
+<span class="font-label-md text-sm md:text-label-md text-on-surface-variant uppercase tracking-widest">Athletes<br>Registered</span>
 </div>
-<div class="flex flex-col items-center text-center px-6">
-<span class="material-symbols-outlined text-secondary text-6xl mb-8" style="font-variation-settings: &quot;FILL&quot; 0;">sports</span>
-<span class="font-headline-xl text-6xl text-on-secondary-fixed font-black mb-4">411+</span>
-<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Trained<br>Coaches</span>
+<div class="flex flex-col items-center text-center px-2 md:px-6">
+<span class="material-symbols-outlined text-secondary text-5xl md:text-6xl mb-4 md:mb-8" style="font-variation-settings: &quot;FILL&quot; 0;">sports</span>
+<span class="font-headline-xl text-4xl sm:text-5xl lg:text-6xl text-on-secondary-fixed font-black mb-4">411+</span>
+<span class="font-label-md text-sm md:text-label-md text-on-surface-variant uppercase tracking-widest">Trained<br>Coaches</span>
 </div>
-<div class="flex flex-col items-center text-center px-6">
-<span class="material-symbols-outlined text-[#2e7d32] text-6xl mb-8" style="font-variation-settings: &quot;FILL&quot; 0;">volunteer_activism</span>
-<span class="font-headline-xl text-6xl text-on-secondary-fixed font-black mb-4">105,486+</span>
-<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Families<br>Supported</span>
+<div class="flex flex-col items-center text-center px-2 md:px-6">
+<span class="material-symbols-outlined text-[#2e7d32] text-5xl md:text-6xl mb-4 md:mb-8" style="font-variation-settings: &quot;FILL&quot; 0;">volunteer_activism</span>
+<span class="font-headline-xl text-4xl sm:text-5xl lg:text-6xl text-on-secondary-fixed font-black mb-4">105,486+</span>
+<span class="font-label-md text-sm md:text-label-md text-on-surface-variant uppercase tracking-widest">Families<br>Supported</span>
 </div>
-<div class="flex flex-col items-center text-center px-6">
-<span class="material-symbols-outlined text-[#7b1fa2] text-6xl mb-8" style="font-variation-settings: &quot;FILL&quot; 0;">location_on</span>
-<span class="font-headline-xl text-6xl text-on-secondary-fixed font-black mb-4">77</span>
-<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Districts<br>Reached</span>
+<div class="flex flex-col items-center text-center px-2 md:px-6">
+<span class="material-symbols-outlined text-[#7b1fa2] text-5xl md:text-6xl mb-4 md:mb-8" style="font-variation-settings: &quot;FILL&quot; 0;">location_on</span>
+<span class="font-headline-xl text-4xl sm:text-5xl lg:text-6xl text-on-secondary-fixed font-black mb-4">77</span>
+<span class="font-label-md text-sm md:text-label-md text-on-surface-variant uppercase tracking-widest">Districts<br>Reached</span>
 </div>
 </div>
 </div>
 </section>
 <!-- From Nepal to the World -->
-<section class="py-section-padding-desktop px-margin-desktop bg-surface-container-low">
-<div class="max-w-container-max-width mx-auto flex flex-col lg:flex-row items-center gap-20">
-<div class="lg:w-5/12">
+<section class="py-section-padding-mobile md:py-section-padding-desktop px-6 lg:px-margin-desktop bg-surface-container-low">
+<div class="max-w-container-max-width mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
+<div class="lg:w-5/12 w-full">
 <span class="font-eyebrow text-eyebrow text-primary uppercase block mb-6 tracking-widest">FROM NEPAL TO THE WORLD</span>
-<h2 class="font-headline-xl text-5xl text-on-surface mb-8 leading-tight">From Nepal to the World Stage</h2>
-<p class="font-body-lg text-xl text-on-surface-variant mb-12 leading-relaxed">
+<h2 class="font-headline-xl text-3xl md:text-5xl text-on-surface mb-6 md:mb-8 leading-tight">From Nepal to the World Stage</h2>
+<p class="font-body-lg text-lg md:text-xl text-on-surface-variant mb-8 md:mb-12 leading-relaxed">
                         Our athletes proudly represent Nepal at World Summer and Winter Games, bringing home medals and inspiring millions.
                     </p>
-<a class="bg-transparent border-2 border-secondary text-secondary hover:bg-secondary hover:text-white font-cta text-cta px-10 py-5 rounded-DEFAULT transition-all duration-300 uppercase tracking-widest flex items-center gap-3 inline-flex shadow-sm" href="#">
+<a class="bg-transparent border-2 border-secondary text-secondary hover:bg-secondary hover:text-white font-cta text-cta px-6 py-4 sm:px-10 sm:py-5 rounded-DEFAULT transition-all duration-300 uppercase tracking-widest flex items-center gap-3 inline-flex shadow-sm" href="#">
                         EXPLORE OUR JOURNEY <span class="material-symbols-outlined text-md">arrow_forward</span>
 </a>
 </div>
-<div class="lg:w-7/12">
-<img class="w-full h-[600px] rounded-2xl shadow-2xl object-cover" data-alt="A group of Nepali Special Olympics athletes proudly displaying their medals on a podium, wrapped in the Nepal flag, smiling vibrantly at an international competition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4kb7QvIEXotjepi-A7zEZya26OW_-3zzkSCoS-fBAD8jUnxSNJ7kNHFxzehJXMdtVrAIbNaQIciz2La6y-IPOmb44qr3Bacz6B3Yj-wteKBlfvKnclSW5_QHBeMKHUHEc3j1G5EZRTM1UO_3FTya7qWxDWRUR0Zbo2RRnE2PlZu6LkjYRvvWOK8Upx-fADMI0eeUnLdTWjqRoyY36CZYCD_4anBn9Mezxy8cKT8xckzljUe7RKWMV">
+<div class="lg:w-7/12 w-full">
+<img class="w-full h-[300px] sm:h-[450px] lg:h-[600px] rounded-2xl shadow-2xl object-cover" data-alt="A group of Nepali Special Olympics athletes proudly displaying their medals on a podium, wrapped in the Nepal flag, smiling vibrantly at an international competition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4kb7QvIEXotjepi-A7zEZya26OW_-3zzkSCoS-fBAD8jUnxSNJ7kNHFxzehJXMdtVrAIbNaQIciz2La6y-IPOmb44qr3Bacz6B3Yj-wteKBlfvKnclSW5_QHBeMKHUHEc3j1G5EZRTM1UO_3FTya7qWxDWRUR0Zbo2RRnE2PlZu6LkjYRvvWOK8Upx-fADMI0eeUnLdTWjqRoyY36CZYCD_4anBn9Mezxy8cKT8xckzljUe7RKWMV">
 </div>
 </div>
 </section>
 <!-- Athlete Story -->
-<section class="py-section-padding-desktop px-margin-desktop bg-white">
-<div class="max-w-container-max-width mx-auto flex flex-col lg:flex-row items-center gap-24">
-<div class="lg:w-1/2">
-<img class="w-full h-[700px] rounded-3xl shadow-xl object-cover" data-alt="Portrait of Sita Thapa, a Nepali Special Olympics athlete, smiling confidently, wearing her team jacket." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJb2k4BvnXUIElHK4qGPBSm_M6rYpugskg0fVv0JvzT6YlfLoI2KwFJcqyvz5xfSDCPIIFIXmKyYN1TasaMjGrf5tVQ7jo_fPyWk-eVnFVficfcfglhPfHXXe0zAas6k7qjZaNNmKqn5EDjDPZYVLXh0wzKoK5Ejakj78sPJRBPzgwSeRWjw0oOJiPVszPvVLDWkkMHqUJQJ7bpiy_BynOF65sM_AaSCM2YVxjxu3lbdB29rTr1wiX">
+<section class="py-section-padding-mobile md:py-section-padding-desktop px-6 lg:px-margin-desktop bg-white">
+<div class="max-w-container-max-width mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-24">
+<div class="lg:w-1/2 w-full">
+<img class="w-full h-[350px] sm:h-[500px] lg:h-[700px] rounded-3xl shadow-xl object-cover" data-alt="Portrait of Sita Thapa, a Nepali Special Olympics athlete, smiling confidently, wearing her team jacket." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJb2k4BvnXUIElHK4qGPBSm_M6rYpugskg0fVv0JvzT6YlfLoI2KwFJcqyvz5xfSDCPIIFIXmKyYN1TasaMjGrf5tVQ7jo_fPyWk-eVnFVficfcfglhPfHXXe0zAas6k7qjZaNNmKqn5EDjDPZYVLXh0wzKoK5Ejakj78sPJRBPzgwSeRWjw0oOJiPVszPvVLDWkkMHqUJQJ7bpiy_BynOF65sM_AaSCM2YVxjxu3lbdB29rTr1wiX">
 </div>
-<div class="lg:w-1/2">
-<span class="font-eyebrow text-eyebrow text-primary uppercase block mb-6 tracking-widest">MEET OUR ATHLETES</span>
-<h2 class="font-headline-xl text-5xl text-on-surface mb-12 leading-tight">Real People. Real Stories. Real Inspiration.</h2>
-<div class="bg-surface-container-low p-12 rounded-2xl border-l-8 border-primary mb-12 relative shadow-sm">
-<span class="material-symbols-outlined text-primary text-8xl absolute -top-8 -left-8 opacity-20" style="font-variation-settings: &quot;FILL&quot; 1;">format_quote</span>
-<p class="font-headline-lg text-3xl text-on-surface-variant italic mb-8 relative z-10 leading-relaxed">
+<div class="lg:w-1/2 w-full">
+<span class="font-eyebrow text-eyebrow text-primary uppercase block mb-4 md:mb-6 tracking-widest">MEET OUR ATHLETES</span>
+<h2 class="font-headline-xl text-3xl md:text-5xl text-on-surface mb-6 md:mb-12 leading-tight">Real People. Real Stories. Real Inspiration.</h2>
+<div class="bg-surface-container-low p-6 sm:p-12 rounded-2xl border-l-8 border-primary mb-6 md:mb-12 relative shadow-sm">
+<span class="material-symbols-outlined text-primary text-6xl sm:text-8xl absolute -top-6 -left-6 sm:-top-8 sm:-left-8 opacity-20" style="font-variation-settings: &quot;FILL&quot; 1;">format_quote</span>
+<p class="font-headline-lg text-xl sm:text-2xl lg:text-3xl text-on-surface-variant italic mb-6 md:mb-8 relative z-10 leading-relaxed">
                             “Sport gave me a place to compete. It gave me a team. It gave me confidence.”
                         </p>
-<p class="font-label-md text-lg text-on-surface uppercase tracking-widest font-bold">
+<p class="font-label-md text-base sm:text-lg text-on-surface uppercase tracking-widest font-bold">
                             — Sita Thapa, Athletics
                         </p>
 </div>
-<div class="flex justify-between items-center">
-<a class="font-label-md text-lg text-primary hover:text-primary-container flex items-center gap-3 uppercase tracking-widest font-bold" href="#">
+<div class="flex justify-between items-center gap-4">
+<a class="font-label-md text-base sm:text-lg text-primary hover:text-primary-container flex items-center gap-2 sm:gap-3 uppercase tracking-widest font-bold text-sm sm:text-base" href="#">
                             READ SITA'S STORY <span class="material-symbols-outlined">arrow_forward</span>
 </a>
-<div class="flex gap-4">
-<button class="w-14 h-14 rounded-full border-2 border-outline flex items-center justify-center text-secondary hover:bg-surface-variant hover:border-secondary transition-all"><span class="material-symbols-outlined text-2xl">chevron_left</span></button>
-<button class="w-14 h-14 rounded-full border-2 border-outline flex items-center justify-center text-secondary hover:bg-surface-variant hover:border-secondary transition-all"><span class="material-symbols-outlined text-2xl">chevron_right</span></button>
+<div class="flex gap-2 sm:gap-4">
+<button aria-label="Previous story" class="w-10 h-10 sm:w-14 sm:h-14 rounded-full border-2 border-outline flex items-center justify-center text-secondary hover:bg-surface-variant hover:border-secondary transition-all"><span class="material-symbols-outlined text-xl sm:text-2xl">chevron_left</span></button>
+<button aria-label="Next story" class="w-10 h-10 sm:w-14 sm:h-14 rounded-full border-2 border-outline flex items-center justify-center text-secondary hover:bg-surface-variant hover:border-secondary transition-all"><span class="material-symbols-outlined text-xl sm:text-2xl">chevron_right</span></button>
 </div>
 </div>
 </div>
 </div>
 </section>
 <!-- Latest News & Events -->
-<section class="py-section-padding-desktop px-margin-desktop bg-surface-container-lowest border-t border-outline-variant">
+<section class="py-section-padding-mobile md:py-section-padding-desktop px-6 lg:px-margin-desktop bg-surface-container-lowest border-t border-outline-variant">
 <div class="max-w-container-max-width mx-auto">
-<div class="flex justify-between items-end mb-16">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10 md:mb-16">
 <div>
 <span class="font-eyebrow text-eyebrow text-primary uppercase block mb-4 tracking-widest">STAY UPDATED</span>
-<h2 class="font-headline-xl text-5xl text-on-surface">Latest News &amp; Events</h2>
+<h2 class="font-headline-xl text-3xl md:text-5xl text-on-surface">Latest News &amp; Events</h2>
 </div>
 <a class="font-label-md text-label-md text-secondary hover:text-primary flex items-center gap-2 uppercase tracking-widest font-bold" href="#">
                         VIEW ALL NEWS <span class="material-symbols-outlined text-md">arrow_forward</span>
 </a>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
 <!-- News Card 1 -->
 <div class="bg-surface border border-outline-variant rounded-2xl overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col group">
-<div class="overflow-hidden h-72">
+<div class="overflow-hidden h-48 sm:h-64 md:h-72">
 <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Nepali Special Olympics team celebrating at the Asia Pacific Games" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD34FvC_K1yO1A9Xg2T7Qy9p3_O3X3_M3r3A4rM_W4H5a2T0h9n4C0A7K7Z0_Q7v7I1k9_V7V8K7X6F5W4E4_V9V1R2_P4O0C4H3_N6Z2I1K6_U0A0A0K1F2A7_X4Q1H2G0H1_O3M4V2V9Q4A3_B2Z1M1M2_H4X8M2T3V9O1E2W9R0Z8H5I4T8K1D6A0E3L6U4_A9M2C8B1Z7J4H2C1O1C6_Z4A8B3C1U1G1X6M6_H3C1A1D6M6">
 </div>
-<div class="p-8 flex flex-col flex-grow">
+<div class="p-6 sm:p-8 flex flex-col flex-grow">
 <div class="flex items-center gap-4 mb-6">
 <span class="bg-primary text-white text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wider">NEWS</span>
 <span class="font-label-md text-sm text-on-surface-variant">May 15, 2025</span>
@@ -371,10 +440,10 @@
 </div>
 <!-- News Card 2 -->
 <div class="bg-surface border border-outline-variant rounded-2xl overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col group">
-<div class="overflow-hidden h-72">
+<div class="overflow-hidden h-48 sm:h-64 md:h-72">
 <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Two unified partners high fiving on a football pitch" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsON6hpJWzCvmeRbpQwhLd8rzvz-DL3CULnUHQV2PZvZHhJaE2K5MXjT9SO061RDSQ7fYiiXIEXt4h3A9QVIjprbllh7UE-SU9chPa6ayx0FwfJqa7SzH_Bd0mIVJr7gpN5cEs-g81Lfm8Zni7VKRDfFw_LBLZVewlX6-ATZmAErxMeLY70Vdo8g_Ag4m7h6Hs3b62nJ3S1x0YCA6jxJ0bw45jiKi72tmBJv4epDHjiNTiTEEtcsl6">
 </div>
-<div class="p-8 flex flex-col flex-grow">
+<div class="p-6 sm:p-8 flex flex-col flex-grow">
 <div class="flex items-center gap-4 mb-6">
 <span class="bg-secondary text-white text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wider">STORY</span>
 <span class="font-label-md text-sm text-on-surface-variant">Apr 28, 2025</span>
@@ -389,10 +458,10 @@
 </div>
 <!-- News Card 3 -->
 <div class="bg-surface border border-outline-variant rounded-2xl overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col group">
-<div class="overflow-hidden h-72">
+<div class="overflow-hidden h-48 sm:h-64 md:h-72">
 <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Athletes lining up for the opening ceremony of the National Summer Games" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWDFa3OmSpaRUYyh916jx8_sCeNqVqq_Fjddb6EX0pvTDWPoRfQscspVPK21_kOiR583J9pvvC_WBaJIvobOFjf_zkWZxjO4FrgsWp8gmtZUutvtMHZ_8-EvbtHJWd48wZ4n_lwwIpavKo_6T9Fkl0lOSC3df3HdKk-KND5c9rNpEXL1ageVun_BlYScD9HdzAmSmBG2DgkqhWyB_rHca2LaKjdydaqMhRPMxYgn4h61FCwPmCccHY">
 </div>
-<div class="p-8 flex flex-col flex-grow">
+<div class="p-6 sm:p-8 flex flex-col flex-grow">
 <div class="flex items-center gap-4 mb-6">
 <span class="bg-[#2e7d32] text-white text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wider">EVENT</span>
 <span class="font-label-md text-sm text-on-surface-variant">Apr 20, 2025</span>
@@ -409,53 +478,53 @@
 </div>
 </section>
 <!-- Final CTA -->
-<section class="bg-[#001847] py-32 px-margin-desktop relative overflow-hidden">
+<section class="bg-[#001847] py-16 md:py-32 px-6 lg:px-margin-desktop relative overflow-hidden">
 <div class="absolute inset-0 opacity-10 pointer-events-none">
 <svg class="w-full h-full text-white fill-current" preserveAspectRatio="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 100 L50 0 L100 100 Z"></path>
 </svg>
 </div>
-<div class="max-w-container-max-width mx-auto relative z-10 flex flex-col lg:flex-row gap-20 items-center">
-<div class="lg:w-1/2">
-<span class="font-eyebrow text-eyebrow text-primary-fixed uppercase block mb-6 tracking-widest">BE PART OF THE MOVEMENT</span>
-<h2 class="font-headline-xl text-6xl text-white mb-8 leading-tight">Together, We Can Create an Inclusive Nepal.</h2>
-<p class="font-body-lg text-xl text-surface-variant/90 mb-8 max-w-xl leading-relaxed">
+<div class="max-w-container-max-width mx-auto relative z-10 flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
+<div class="lg:w-1/2 w-full">
+<span class="font-eyebrow text-eyebrow text-primary-fixed uppercase block mb-4 md:mb-6 tracking-widest">BE PART OF THE MOVEMENT</span>
+<h2 class="font-headline-xl text-3xl sm:text-4xl md:text-6xl text-white mb-6 md:mb-8 leading-tight">Together, We Can Create an Inclusive Nepal.</h2>
+<p class="font-body-lg text-lg md:text-xl text-surface-variant/90 mb-8 max-w-xl leading-relaxed">
                         Join us in our mission to empower individuals with intellectual disabilities through the transformative power of sports.
                     </p>
 </div>
 <div class="lg:w-1/2 w-full flex flex-col gap-6">
-<a class="bg-white hover:bg-surface-container-low text-[#001847] p-8 rounded-2xl flex items-center justify-between group transition-all duration-300 shadow-lg" href="#">
-<div class="flex items-center gap-6">
-<div class="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined text-3xl" style="font-variation-settings: &quot;FILL&quot; 1;">volunteer_activism</span>
+<a class="bg-white hover:bg-surface-container-low text-[#001847] p-5 sm:p-8 rounded-2xl flex items-center justify-between group transition-all duration-300 shadow-lg" href="#">
+<div class="flex items-center gap-4 sm:gap-6">
+<div class="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-2xl sm:text-3xl" style="font-variation-settings: &quot;FILL&quot; 1;">volunteer_activism</span>
 </div>
 <div>
-<h3 class="font-headline-lg text-2xl font-bold mb-2">Become a Volunteer</h3>
-<p class="font-body-lg text-on-surface-variant text-base">Give your time and skills to support our athletes.</p>
+<h3 class="font-headline-lg text-xl sm:text-2xl font-bold mb-1 sm:mb-2">Become a Volunteer</h3>
+<p class="font-body-lg text-on-surface-variant text-sm sm:text-base">Give your time and skills to support our athletes.</p>
 </div>
 </div>
 <span class="material-symbols-outlined text-primary text-3xl group-hover:translate-x-2 transition-transform">arrow_forward</span>
 </a>
-<a class="bg-white hover:bg-surface-container-low text-[#001847] p-8 rounded-2xl flex items-center justify-between group transition-all duration-300 shadow-lg" href="#">
-<div class="flex items-center gap-6">
-<div class="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined text-3xl" style="font-variation-settings: &quot;FILL&quot; 1;">favorite</span>
+<a class="bg-white hover:bg-surface-container-low text-[#001847] p-5 sm:p-8 rounded-2xl flex items-center justify-between group transition-all duration-300 shadow-lg" href="#">
+<div class="flex items-center gap-4 sm:gap-6">
+<div class="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-2xl sm:text-3xl" style="font-variation-settings: &quot;FILL&quot; 1;">favorite</span>
 </div>
 <div>
-<h3 class="font-headline-lg text-2xl font-bold mb-2">Donate</h3>
-<p class="font-body-lg text-on-surface-variant text-base">Your contribution funds equipment, training, and events.</p>
+<h3 class="font-headline-lg text-xl sm:text-2xl font-bold mb-1 sm:mb-2">Donate</h3>
+<p class="font-body-lg text-on-surface-variant text-sm sm:text-base">Your contribution funds equipment, training, and events.</p>
 </div>
 </div>
 <span class="material-symbols-outlined text-primary text-3xl group-hover:translate-x-2 transition-transform">arrow_forward</span>
 </a>
-<a class="bg-white hover:bg-surface-container-low text-[#001847] p-8 rounded-2xl flex items-center justify-between group transition-all duration-300 shadow-lg" href="#">
-<div class="flex items-center gap-6">
-<div class="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined text-3xl" style="font-variation-settings: &quot;FILL&quot; 1;">group_add</span>
+<a class="bg-white hover:bg-surface-container-low text-[#001847] p-5 sm:p-8 rounded-2xl flex items-center justify-between group transition-all duration-300 shadow-lg" href="#">
+<div class="flex items-center gap-4 sm:gap-6">
+<div class="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-2xl sm:text-3xl" style="font-variation-settings: &quot;FILL&quot; 1;">group_add</span>
 </div>
 <div>
-<h3 class="font-headline-lg text-2xl font-bold mb-2">Get Involved</h3>
-<p class="font-body-lg text-on-surface-variant text-base">Discover all the ways you can make an impact.</p>
+<h3 class="font-headline-lg text-xl sm:text-2xl font-bold mb-1 sm:mb-2">Get Involved</h3>
+<p class="font-body-lg text-on-surface-variant text-sm sm:text-base">Discover all the ways you can make an impact.</p>
 </div>
 </div>
 <span class="material-symbols-outlined text-primary text-3xl group-hover:translate-x-2 transition-transform">arrow_forward</span>
@@ -466,21 +535,21 @@
 </main>
 <!-- Footer -->
 <footer class="bg-[#001847] border-t border-outline-variant/20 w-full bottom-0 text-white">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 px-margin-desktop py-section-padding-desktop max-w-container-max-width mx-auto">
-<div class="lg:col-span-2 pr-8">
-<a class="flex items-center gap-4 mb-8 w-56 h-auto brightness-0 invert" href="index.html">
-    <img alt="Special Olympics Nepal" class="h-10 md:h-12 w-auto object-contain" src="assets/images/logo_special_olympics.svg"/>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-16 px-6 lg:px-margin-desktop py-section-padding-mobile md:py-section-padding-desktop max-w-container-max-width mx-auto">
+<div class="lg:col-span-2 pr-0 lg:pr-8">
+<a class="flex items-center gap-4 mb-6 md:mb-8 w-56 h-auto brightness-0 invert" href="index.html">
+    <img alt="Special Olympics Nepal" class="h-9 sm:h-10 md:h-12 w-auto object-contain" src="assets/images/logo_special_olympics.svg"/>
 </a>
-<p class="font-body-lg text-surface-variant/80 mb-10 max-w-md leading-relaxed">Creating a world of inclusion through the power of sports for people with intellectual disabilities across Nepal.</p>
+<p class="font-body-lg text-surface-variant/80 mb-8 md:mb-10 max-w-md leading-relaxed">Creating a world of inclusion through the power of sports for people with intellectual disabilities across Nepal.</p>
 <div class="flex gap-4">
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">public</span></a>
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">photo_camera</span></a>
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">video_library</span></a>
+<a aria-label="Website" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">public</span></a>
+<a aria-label="Instagram" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">photo_camera</span></a>
+<a aria-label="YouTube" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">video_library</span></a>
 </div>
 </div>
 <div>
-<h4 class="font-label-md text-lg text-white font-bold mb-8 uppercase tracking-widest opacity-90">What We Do</h4>
-<ul class="space-y-5">
+<h4 class="font-label-md text-lg text-white font-bold mb-6 md:mb-8 uppercase tracking-widest opacity-90">What We Do</h4>
+<ul class="space-y-4 md:space-y-5">
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="healthy-athletes-program.html">Healthy Athletes®</a></li>
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="index.html#programs">Programs</a></li>
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="index.html#sports">Sports</a></li>
@@ -488,8 +557,8 @@
 </ul>
 </div>
 <div>
-<h4 class="font-label-md text-lg text-white font-bold mb-8 uppercase tracking-widest opacity-90">Get Involved</h4>
-<ul class="space-y-5">
+<h4 class="font-label-md text-lg text-white font-bold mb-6 md:mb-8 uppercase tracking-widest opacity-90">Get Involved</h4>
+<ul class="space-y-4 md:space-y-5">
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="contact-us.html">Volunteer</a></li>
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="contact-us.html">Donate</a></li>
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="contact-us.html">Fundraise</a></li>
@@ -497,17 +566,17 @@
 </ul>
 </div>
 <div>
-<h4 class="font-label-md text-lg text-white font-bold mb-8 uppercase tracking-widest opacity-90">Stay Connected</h4>
-<form class="flex flex-col gap-5">
+<h4 class="font-label-md text-lg text-white font-bold mb-6 md:mb-8 uppercase tracking-widest opacity-90">Stay Connected</h4>
+<form class="flex flex-col gap-4 md:gap-5">
 <input aria-label="Email Address" class="bg-white/10 border border-white/20 rounded-lg px-5 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-lg w-full transition-all" placeholder="Enter your email" type="email">
 <button class="bg-[#bb0027] hover:bg-[#e51937] text-white font-cta text-lg px-8 py-4 rounded-lg transition-colors uppercase tracking-widest text-center w-full font-bold shadow-md" type="submit">SUBSCRIBE</button>
 </form>
 </div>
 </div>
-<div class="bg-black/20 py-8 px-margin-desktop border-t border-white/10">
+<div class="bg-black/20 py-6 md:py-8 px-6 lg:px-margin-desktop border-t border-white/10">
 <div class="max-w-container-max-width mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-<p class="font-body-md text-surface-variant/60">© 2025 Special Olympics Nepal. All rights reserved.</p>
-<div class="flex gap-10">
+<p class="font-body-md text-surface-variant/60 text-center md:text-left">© 2025 Special Olympics Nepal. All rights reserved.</p>
+<div class="flex gap-6 md:gap-10">
 <a class="font-body-md text-surface-variant/60 hover:text-white transition-colors" href="#">Privacy Policy</a>
 <a class="font-body-md text-surface-variant/60 hover:text-white transition-colors" href="#">Terms of Use</a>
 </div>
@@ -515,5 +584,42 @@
 </div>
 </footer>
 
+<script>
+    // Mobile Drawer Controller
+    const trigger = document.getElementById('mobile-menu-trigger');
+    const drawer = document.getElementById('mobile-drawer');
+    const backdrop = document.getElementById('mobile-drawer-backdrop');
+    const content = document.getElementById('mobile-drawer-content');
+    const closeBtn = document.getElementById('mobile-drawer-close');
+    const hamburger = trigger.querySelector('.hamburger-icon');
 
+    function openMenu() {
+        drawer.classList.remove('pointer-events-none');
+        drawer.classList.add('opacity-100');
+        backdrop.classList.add('opacity-100');
+        content.classList.remove('translate-x-full');
+        hamburger.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        drawer.classList.add('pointer-events-none');
+        drawer.classList.remove('opacity-100');
+        backdrop.classList.remove('opacity-100');
+        content.classList.add('translate-x-full');
+        hamburger.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    trigger.addEventListener('click', () => {
+        if (hamburger.classList.contains('open')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    closeBtn.addEventListener('click', closeMenu);
+    backdrop.addEventListener('click', closeMenu);
+</script>
 </body></html>
