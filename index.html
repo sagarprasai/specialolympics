@@ -109,14 +109,13 @@
 </header>
 
 <main id="main">
-    <section class="relative min-h-[70svh] md:min-h-[78svh] flex items-end bg-on-secondary-fixed" aria-label="Introduction">
-        <img class="absolute inset-0 w-full h-full object-cover object-[center_40%]" alt="Special Olympics athlete sitting with a young child at an outdoor gathering" src="assets/images/hero_image.png">
-        <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/10"></div>
-        <div class="relative z-10 w-full max-w-6xl mx-auto px-6 pt-28 pb-14 md:pb-20">
-            <div class="max-w-2xl">
-                <h1 class="text-4xl sm:text-5xl md:text-[3.4rem] font-extrabold text-[#ffd6d4] leading-[1.08] tracking-tight text-balance">Inclusion Revolution in the Land of the Himalayas.</h1>
-                <p class="mt-4 text-lg text-white" lang="ne">समान अवसर, समान सम्मान — समावेशिताको पहिचान</p>
-                <p class="mt-5 text-base md:text-lg text-white leading-relaxed max-w-xl">Special Olympics Nepal provides year-round sports training and Olympic-type competition for children and adults with intellectual disabilities.</p>
+    <section class="relative h-[90vh] min-h-[560px] overflow-hidden flex items-end bg-black" aria-label="Introduction">
+        <img id="hero-parallax" class="hero-parallax-img absolute inset-x-0 top-0 w-full h-[120%] object-cover object-[center_35%]" alt="Special Olympics athlete sitting with a young child at an outdoor gathering" src="assets/images/hero_image.png">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent max-w-[70%]"></div>
+        <div class="relative z-10 w-full px-6 sm:px-8 md:px-10 pt-28 pb-14 md:pb-20">
+            <div class="max-w-md md:max-w-lg">
+                <h1 class="text-4xl sm:text-5xl md:text-[3.25rem] font-extrabold text-primary leading-[1.08] tracking-tight text-balance">Inclusion Revolution in the Land of the Himalayas.</h1>
+                <p class="mt-5 text-base md:text-lg text-white leading-relaxed">Special Olympics Nepal provides year-round sports training and Olympic-type competition for children and adults with intellectual disabilities.</p>
                 <div class="mt-8">
                     <a class="inline-flex items-center justify-center bg-primary text-white text-sm font-bold px-6 py-3.5 rounded-xl hover:bg-primary-container transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" href="#what-we-do">What we do</a>
                 </div>
@@ -357,31 +356,54 @@
         var button = document.getElementById("menu-button");
         var menu = document.getElementById("mobile-menu");
         var icon = document.getElementById("menu-icon");
-        if (!button || !menu) return;
-
-        function setOpen(open) {
-            if (open) {
-                menu.removeAttribute("hidden");
-                button.setAttribute("aria-expanded", "true");
-                button.setAttribute("aria-label", "Close menu");
-                if (icon) icon.textContent = "close";
-            } else {
-                menu.setAttribute("hidden", "");
-                button.setAttribute("aria-expanded", "false");
-                button.setAttribute("aria-label", "Open menu");
-                if (icon) icon.textContent = "menu";
+        if (button && menu) {
+            function setOpen(open) {
+                if (open) {
+                    menu.removeAttribute("hidden");
+                    button.setAttribute("aria-expanded", "true");
+                    button.setAttribute("aria-label", "Close menu");
+                    if (icon) icon.textContent = "close";
+                } else {
+                    menu.setAttribute("hidden", "");
+                    button.setAttribute("aria-expanded", "false");
+                    button.setAttribute("aria-label", "Open menu");
+                    if (icon) icon.textContent = "menu";
+                }
             }
+
+            button.addEventListener("click", function () {
+                setOpen(menu.hasAttribute("hidden"));
+            });
+
+            menu.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    setOpen(false);
+                });
+            });
         }
 
-        button.addEventListener("click", function () {
-            setOpen(menu.hasAttribute("hidden"));
-        });
+        var heroImg = document.getElementById("hero-parallax");
+        if (!heroImg || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-        menu.querySelectorAll("a").forEach(function (link) {
-            link.addEventListener("click", function () {
-                setOpen(false);
-            });
-        });
+        var heroSection = heroImg.closest("section");
+        var ticking = false;
+
+        function updateParallax() {
+            ticking = false;
+            var rect = heroSection.getBoundingClientRect();
+            if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+            var offset = Math.max(0, -rect.top) * 0.35;
+            heroImg.style.transform = "translate3d(0, " + offset + "px, 0)";
+        }
+
+        window.addEventListener("scroll", function () {
+            if (!ticking) {
+                window.requestAnimationFrame(updateParallax);
+                ticking = true;
+            }
+        }, { passive: true });
+
+        updateParallax();
     })();
 </script>
 </body>
