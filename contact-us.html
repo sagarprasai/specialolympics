@@ -121,30 +121,91 @@
         .card-border {
             border: 1px solid #E2E8F0;
         }
+        /* Mobile menu hamburger animation styles */
+        .hamburger-icon span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: currentColor;
+            transition: all 0.3s ease-in-out;
+        }
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 16px;
+            width: 24px;
+            cursor: pointer;
+        }
+        .hamburger-icon.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger-icon.open span:nth-child(2) {
+            opacity: 0;
+            transform: scale(0);
+        }
+        .hamburger-icon.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
     </style>
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
 <!-- TopNavBar -->
 <header class="bg-surface border-b border-outline-variant shadow-sm w-full top-0 z-50 sticky transition-all duration-300">
-<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-[1920px] mx-auto">
+<div class="flex justify-between items-center w-full px-6 lg:px-margin-desktop py-4 max-w-[1920px] mx-auto">
 <a href="index.html" class="flex items-center gap-3 flex-shrink-0">
-<img alt="Special Olympics Nepal" class="h-10 md:h-12 w-auto object-contain" src="assets/images/logo_special_olympics.svg"/>
+<img alt="Special Olympics Nepal" class="h-9 sm:h-10 md:h-12 w-auto object-contain" src="assets/images/logo_special_olympics.svg"/>
 </a>
-<div class="flex items-center justify-end flex-grow gap-8">
-<nav class="hidden lg:flex items-center gap-8">
+<div class="flex items-center justify-end flex-grow gap-4 lg:gap-8">
+<nav class="hidden lg:flex items-center gap-6 xl:gap-8">
 <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-surface-container-low px-3 py-2 rounded-md ease-in-out whitespace-nowrap" href="index.html">Home</a>
 <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-surface-container-low px-3 py-2 rounded-md ease-in-out whitespace-nowrap" href="healthy-athletes-program.html">Programs</a>
 <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-surface-container-low px-3 py-2 rounded-md ease-in-out whitespace-nowrap" href="news-article.html">Stories & News</a>
 <a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1 whitespace-nowrap font-bold" href="contact-us.html">Contact Us</a>
 </nav>
-<div class="flex items-center gap-6">
-<button aria-label="Search" class="text-secondary hover:text-primary transition-colors">
+<div class="flex items-center gap-3 md:gap-6">
+<button aria-label="Search" class="hidden sm:flex text-secondary hover:text-primary transition-colors">
 <span class="material-symbols-outlined text-xl">search</span>
 </button>
-<button class="font-label-md text-label-md text-secondary hover:text-primary transition-colors whitespace-nowrap">नेपाली / EN</button>
-<a class="bg-primary hover:bg-primary-container text-white font-cta text-cta px-6 py-3 rounded-DEFAULT transition-colors uppercase tracking-wider flex items-center gap-2 whitespace-nowrap" href="contact-us.html">
+<button class="hidden sm:flex font-label-md text-label-md text-secondary hover:text-primary transition-colors whitespace-nowrap">नेपाली / EN</button>
+<a class="bg-primary hover:bg-primary-container text-white font-cta text-cta px-4 py-2 sm:px-6 sm:py-3 rounded-DEFAULT transition-colors uppercase tracking-wider flex items-center gap-2 whitespace-nowrap text-sm sm:text-base" href="contact-us.html">
                         DONATE <span class="material-symbols-outlined text-sm">favorite</span>
 </a>
+<button id="mobile-menu-trigger" aria-label="Toggle Menu" class="lg:hidden text-secondary hover:text-primary p-2 focus:outline-none relative w-10 h-10 flex items-center justify-center">
+<div class="hamburger-icon flex flex-col justify-between w-6 h-4 transition-transform duration-300">
+<span class="w-full h-0.5 bg-current transition-all duration-300 origin-left"></span>
+<span class="w-full h-0.5 bg-current transition-all duration-300"></span>
+<span class="w-full h-0.5 bg-current transition-all duration-300 origin-left"></span>
+</div>
+</button>
+</div>
+</div>
+</div>
+<!-- Mobile Drawer -->
+<div id="mobile-drawer" class="fixed inset-0 z-40 lg:hidden pointer-events-none transition-all duration-300 opacity-0">
+<div id="mobile-drawer-backdrop" class="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+<div id="mobile-drawer-content" class="absolute right-0 top-0 bottom-0 w-[300px] max-w-[85vw] bg-surface border-l border-outline-variant/30 flex flex-col p-6 shadow-2xl transition-transform duration-300 translate-x-full">
+<div class="flex justify-between items-center mb-8 border-b border-outline-variant/30 pb-4">
+<span class="font-eyebrow text-eyebrow text-primary tracking-widest font-bold">Menu</span>
+<button id="mobile-drawer-close" aria-label="Close Menu" class="text-secondary hover:text-primary p-2">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<nav class="flex flex-col gap-4 mb-8">
+<a class="font-label-md text-lg text-secondary hover:text-primary hover:bg-surface-container-low px-4 py-2 rounded-md transition-all" href="index.html">Home</a>
+<a class="font-label-md text-lg text-secondary hover:text-primary hover:bg-surface-container-low px-4 py-2 rounded-md transition-all" href="healthy-athletes-program.html">Programs</a>
+<a class="font-label-md text-lg text-secondary hover:text-primary hover:bg-surface-container-low px-4 py-2 rounded-md transition-all" href="news-article.html">Stories & News</a>
+<a class="font-label-md text-lg text-primary border-l-4 border-primary pl-4 py-2 font-bold bg-primary/5" href="contact-us.html">Contact Us</a>
+</nav>
+<div class="flex flex-col gap-6 mt-auto pt-6 border-t border-outline-variant/30">
+<div class="relative w-full">
+<input aria-label="Search" class="w-full bg-surface-container-low border border-outline-variant rounded-lg pl-10 pr-4 py-3 text-on-surface font-body-md placeholder-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Search..." type="text">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">search</span>
+</div>
+<button class="font-label-md text-label-md text-secondary hover:text-primary transition-colors py-2.5 flex items-center justify-center gap-2 border border-outline-variant rounded-lg">
+<span class="material-symbols-outlined text-lg">language</span>
+नेपाली / EN
+</button>
 </div>
 </div>
 </div>
@@ -152,18 +213,18 @@
 <!-- Main Content Area -->
 <main class="flex-grow">
 <!-- Contact Hero Section -->
-<section class="px-margin-desktop py-section-padding-desktop max-w-container-max-width mx-auto">
+<section class="px-6 lg:px-margin-desktop py-12 md:py-section-padding-desktop max-w-container-max-width mx-auto">
 <div class="max-w-3xl">
 <span class="font-eyebrow text-eyebrow text-primary uppercase mb-stack-md block tracking-[0.1em]">GET IN TOUCH</span>
-<h1 class="font-headline-xl text-headline-xl text-on-secondary-fixed mb-stack-lg">Contact Special Olympics Nepal</h1>
-<p class="font-body-lg text-body-lg text-secondary">Have a question, want to get involved, or would like to learn more about our work? We would be happy to hear from you.</p>
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-secondary-fixed mb-stack-lg leading-tight">Contact Special Olympics Nepal</h1>
+<p class="font-body-lg text-body-md md:text-body-lg text-secondary">Have a question, want to get involved, or would like to learn more about our work? We would be happy to hear from you.</p>
 </div>
 </section>
 <!-- Contact Main Content (Two-Column) -->
-<section class="px-margin-desktop pb-section-padding-desktop max-w-container-max-width mx-auto">
-<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<section class="px-6 lg:px-margin-desktop pb-section-padding-mobile md:pb-section-padding-desktop max-w-container-max-width mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-gutter">
 <!-- LEFT: Contact Info -->
-<div class="md:col-span-5 flex flex-col gap-stack-lg pr-gutter">
+<div class="lg:col-span-5 flex flex-col gap-stack-lg pr-0 lg:pr-gutter">
 <h2 class="font-headline-md text-headline-md text-on-secondary-fixed mb-stack-sm">Let's Connect</h2>
 <div class="flex items-start gap-stack-md">
 <span class="material-symbols-outlined text-primary mt-1" style="font-variation-settings: 'FILL' 0;">business</span>
@@ -195,7 +256,7 @@
 </div>
 </div>
 <!-- RIGHT: Contact Form -->
-<div class="md:col-span-7 bg-surface-container-lowest p-gutter rounded-xl card-border premium-shadow">
+<div class="lg:col-span-7 bg-surface-container-lowest p-6 sm:p-gutter rounded-xl card-border premium-shadow">
 <div class="mb-stack-lg">
 <h2 class="font-headline-md text-headline-md text-on-secondary-fixed mb-stack-sm">Send Us a Message</h2>
 <p class="font-body-md text-body-md text-secondary">Complete the form and our team will get back to you.</p>
@@ -245,24 +306,24 @@
 </div>
 </section>
 <!-- Location Section -->
-<section class="bg-surface-container-low py-section-padding-desktop">
-<div class="px-margin-desktop max-w-container-max-width mx-auto">
+<section class="bg-surface-container-low py-section-padding-mobile md:py-section-padding-desktop">
+<div class="px-6 lg:px-margin-desktop max-w-container-max-width mx-auto">
 <div class="text-center mb-stack-lg">
-<h2 class="font-headline-lg text-headline-lg text-on-secondary-fixed mb-stack-sm">Find Us</h2>
-<p class="font-body-lg text-body-lg text-secondary">Central Office, Bagbazar, Kathmandu, Nepal</p>
+<h2 class="font-headline-lg text-3xl lg:text-headline-lg text-on-secondary-fixed mb-stack-sm">Find Us</h2>
+<p class="font-body-lg text-body-md md:text-body-lg text-secondary">Central Office, Bagbazar, Kathmandu, Nepal</p>
 </div>
-<div class="w-full h-96 bg-surface-dim rounded-xl overflow-hidden card-border premium-shadow relative flex items-center justify-center">
+<div class="w-full h-64 sm:h-96 bg-surface-dim rounded-xl overflow-hidden card-border premium-shadow relative flex items-center justify-center">
 <!-- Map Placeholder -->
 <img class="w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A clean, minimalist map centered on Bagbazar, Kathmandu, Nepal. The map uses a light color palette with soft greys and subtle blue tones for roads and landmarks. A striking red location pin marks the central office. The overall aesthetic is modern, accessible, and aligns with a professional corporate design." data-location="Kathmandu" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc2dtuAUB5G3Po7XpDNGSORezrdA2XpROJV2E0Y-vKiMSE9aRyIK6XgYMbOcfwDZ6OfV8pQgnS2f6WzUWBKZA1sNg-XErnYqZhxTMn-wh8HqGcVqpXP8L0Eo48RSkRglragarKfB5V_YqS0LUMIQ0NNfuVskO2OSQCINjQ0yMBAYtz2JjNbKRCQIdyAb0T19mRrPNprUWYVhPv7LL7qIN9jIi3ml3Sj5ScXYJ4adNN92nfFdsCtUFd"/>
 </div>
 </div>
 </section>
 <!-- Get Involved CTA -->
-<section class="py-section-padding-desktop bg-on-secondary-fixed relative overflow-hidden">
+<section class="py-16 md:py-24 px-6 bg-on-secondary-fixed relative overflow-hidden">
 <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at right top, var(--tw-colors-primary) 0%, transparent 50%);"></div>
-<div class="px-margin-desktop max-w-container-max-width mx-auto text-center relative z-10">
-<h2 class="font-headline-lg text-headline-lg text-surface-bright mb-stack-md">Looking for ways to get involved?</h2>
-<p class="font-body-lg text-body-lg text-secondary-fixed-dim max-w-2xl mx-auto mb-stack-lg">You can support Special Olympics Nepal by volunteering, donating or partnering with us to create a more inclusive world.</p>
+<div class="px-6 lg:px-margin-desktop max-w-container-max-width mx-auto text-center relative z-10">
+<h2 class="font-headline-lg text-3xl md:text-headline-lg text-surface-bright mb-stack-md">Looking for ways to get involved?</h2>
+<p class="font-body-lg text-body-md md:text-body-lg text-secondary-fixed-dim max-w-2xl mx-auto mb-stack-lg">You can support Special Olympics Nepal by volunteering, donating or partnering with us to create a more inclusive world.</p>
 <button class="bg-primary text-on-primary font-cta text-cta px-8 py-4 rounded-full hover:bg-primary-container transition-all hover:scale-105 flex items-center uppercase tracking-wide mx-auto">
                     GET INVOLVED
                     <span class="material-symbols-outlined ml-2 text-[20px]" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
@@ -272,21 +333,21 @@
 </main>
 <!-- Footer -->
 <footer class="bg-[#001847] border-t border-outline-variant/20 w-full bottom-0 text-white">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 px-margin-desktop py-section-padding-desktop max-w-container-max-width mx-auto">
-<div class="lg:col-span-2 pr-8">
-<a class="flex items-center gap-4 mb-8 w-56 h-auto brightness-0 invert" href="index.html">
-    <img alt="Special Olympics Nepal" class="h-10 md:h-12 w-auto object-contain" src="assets/images/logo_special_olympics.svg"/>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-16 px-6 lg:px-margin-desktop py-section-padding-mobile md:py-section-padding-desktop max-w-container-max-width mx-auto">
+<div class="lg:col-span-2 pr-0 lg:pr-8">
+<a class="flex items-center gap-4 mb-6 md:mb-8 w-56 h-auto brightness-0 invert" href="index.html">
+    <img alt="Special Olympics Nepal" class="h-9 sm:h-10 md:h-12 w-auto object-contain" src="assets/images/logo_special_olympics.svg"/>
 </a>
-<p class="font-body-lg text-surface-variant/80 mb-10 max-w-md leading-relaxed">Creating a world of inclusion through the power of sports for people with intellectual disabilities across Nepal.</p>
+<p class="font-body-lg text-surface-variant/80 mb-8 md:mb-10 max-w-md leading-relaxed">Creating a world of inclusion through the power of sports for people with intellectual disabilities across Nepal.</p>
 <div class="flex gap-4">
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">public</span></a>
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">photo_camera</span></a>
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">video_library</span></a>
+<a aria-label="Website" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">public</span></a>
+<a aria-label="Instagram" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">photo_camera</span></a>
+<a aria-label="YouTube" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">video_library</span></a>
 </div>
 </div>
 <div>
-<h4 class="font-label-md text-lg text-white font-bold mb-8 uppercase tracking-widest opacity-90">What We Do</h4>
-<ul class="space-y-5">
+<h4 class="font-label-md text-lg text-white font-bold mb-6 md:mb-8 uppercase tracking-widest opacity-90">What We Do</h4>
+<ul class="space-y-4 md:space-y-5">
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="healthy-athletes-program.html">Healthy Athletes®</a></li>
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="index.html#programs">Programs</a></li>
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="index.html#sports">Sports</a></li>
@@ -294,8 +355,8 @@
 </ul>
 </div>
 <div>
-<h4 class="font-label-md text-lg text-white font-bold mb-8 uppercase tracking-widest opacity-90">Get Involved</h4>
-<ul class="space-y-5">
+<h4 class="font-label-md text-lg text-white font-bold mb-6 md:mb-8 uppercase tracking-widest opacity-90">Get Involved</h4>
+<ul class="space-y-4 md:space-y-5">
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="contact-us.html">Volunteer</a></li>
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="contact-us.html">Donate</a></li>
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="contact-us.html">Fundraise</a></li>
@@ -303,21 +364,60 @@
 </ul>
 </div>
 <div>
-<h4 class="font-label-md text-lg text-white font-bold mb-8 uppercase tracking-widest opacity-90">Stay Connected</h4>
-<form class="flex flex-col gap-5">
+<h4 class="font-label-md text-lg text-white font-bold mb-6 md:mb-8 uppercase tracking-widest opacity-90">Stay Connected</h4>
+<form class="flex flex-col gap-4 md:gap-5">
 <input aria-label="Email Address" class="bg-white/10 border border-white/20 rounded-lg px-5 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-lg w-full transition-all" placeholder="Enter your email" type="email">
 <button class="bg-[#bb0027] hover:bg-[#e51937] text-white font-cta text-lg px-8 py-4 rounded-lg transition-colors uppercase tracking-widest text-center w-full font-bold shadow-md" type="submit">SUBSCRIBE</button>
 </form>
 </div>
 </div>
-<div class="bg-black/20 py-8 px-margin-desktop border-t border-white/10">
+<div class="bg-black/20 py-6 md:py-8 px-6 lg:px-margin-desktop border-t border-white/10">
 <div class="max-w-container-max-width mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-<p class="font-body-md text-surface-variant/60">© 2025 Special Olympics Nepal. All rights reserved.</p>
-<div class="flex gap-10">
+<p class="font-body-md text-surface-variant/60 text-center md:text-left">© 2025 Special Olympics Nepal. All rights reserved.</p>
+<div class="flex gap-6 md:gap-10">
 <a class="font-body-md text-surface-variant/60 hover:text-white transition-colors" href="#">Privacy Policy</a>
 <a class="font-body-md text-surface-variant/60 hover:text-white transition-colors" href="#">Terms of Use</a>
 </div>
 </div>
 </div>
 </footer>
+
+<script>
+    // Mobile Drawer Controller
+    const trigger = document.getElementById('mobile-menu-trigger');
+    const drawer = document.getElementById('mobile-drawer');
+    const backdrop = document.getElementById('mobile-drawer-backdrop');
+    const content = document.getElementById('mobile-drawer-content');
+    const closeBtn = document.getElementById('mobile-drawer-close');
+    const hamburger = trigger.querySelector('.hamburger-icon');
+
+    function openMenu() {
+        drawer.classList.remove('pointer-events-none');
+        drawer.classList.add('opacity-100');
+        backdrop.classList.add('opacity-100');
+        content.classList.remove('translate-x-full');
+        hamburger.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        drawer.classList.add('pointer-events-none');
+        drawer.classList.remove('opacity-100');
+        backdrop.classList.remove('opacity-100');
+        content.classList.add('translate-x-full');
+        hamburger.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    trigger.addEventListener('click', () => {
+        if (hamburger.classList.contains('open')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    closeBtn.addEventListener('click', closeMenu);
+    backdrop.addEventListener('click', closeMenu);
+</script>
 </body></html>

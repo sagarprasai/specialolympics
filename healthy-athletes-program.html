@@ -114,62 +114,123 @@
         .icon-fill {
             font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+        /* Mobile menu hamburger animation styles */
+        .hamburger-icon span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: currentColor;
+            transition: all 0.3s ease-in-out;
+        }
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 16px;
+            width: 24px;
+            cursor: pointer;
+        }
+        .hamburger-icon.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger-icon.open span:nth-child(2) {
+            opacity: 0;
+            transform: scale(0);
+        }
+        .hamburger-icon.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
     </style>
 </head>
 <body class="bg-surface font-body-md text-body-md text-on-surface antialiased overflow-x-hidden">
 <!-- 1. TopNavBar -->
 <header class="bg-surface border-b border-outline-variant shadow-sm w-full top-0 z-50 sticky transition-all duration-300">
-<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-[1920px] mx-auto">
+<div class="flex justify-between items-center w-full px-6 lg:px-margin-desktop py-4 max-w-[1920px] mx-auto">
 <a href="index.html" class="flex items-center gap-3 flex-shrink-0">
-<img alt="Special Olympics Nepal" class="h-10 md:h-12 w-auto object-contain" src="assets/images/logo_special_olympics.svg"/>
+<img alt="Special Olympics Nepal" class="h-9 sm:h-10 md:h-12 w-auto object-contain" src="assets/images/logo_special_olympics.svg"/>
 </a>
-<div class="flex items-center justify-end flex-grow gap-8">
-<nav class="hidden lg:flex items-center gap-8">
+<div class="flex items-center justify-end flex-grow gap-4 lg:gap-8">
+<nav class="hidden lg:flex items-center gap-6 xl:gap-8">
 <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-surface-container-low px-3 py-2 rounded-md ease-in-out whitespace-nowrap" href="index.html">Home</a>
 <a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1 whitespace-nowrap font-bold" href="healthy-athletes-program.html">Programs</a>
 <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-surface-container-low px-3 py-2 rounded-md ease-in-out whitespace-nowrap" href="news-article.html">Stories & News</a>
 <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-surface-container-low px-3 py-2 rounded-md ease-in-out whitespace-nowrap" href="contact-us.html">Contact Us</a>
 </nav>
-<div class="flex items-center gap-6">
-<button aria-label="Search" class="text-secondary hover:text-primary transition-colors">
+<div class="flex items-center gap-3 md:gap-6">
+<button aria-label="Search" class="hidden sm:flex text-secondary hover:text-primary transition-colors">
 <span class="material-symbols-outlined text-xl">search</span>
 </button>
-<button class="font-label-md text-label-md text-secondary hover:text-primary transition-colors whitespace-nowrap">नेपाली / EN</button>
-<a class="bg-primary hover:bg-primary-container text-white font-cta text-cta px-6 py-3 rounded-DEFAULT transition-colors uppercase tracking-wider flex items-center gap-2 whitespace-nowrap" href="contact-us.html">
+<button class="hidden sm:flex font-label-md text-label-md text-secondary hover:text-primary transition-colors whitespace-nowrap">नेपाली / EN</button>
+<a class="bg-primary hover:bg-primary-container text-white font-cta text-cta px-4 py-2 sm:px-6 sm:py-3 rounded-DEFAULT transition-colors uppercase tracking-wider flex items-center gap-2 whitespace-nowrap text-sm sm:text-base" href="contact-us.html">
                         DONATE <span class="material-symbols-outlined text-sm">favorite</span>
 </a>
+<button id="mobile-menu-trigger" aria-label="Toggle Menu" class="lg:hidden text-secondary hover:text-primary p-2 focus:outline-none relative w-10 h-10 flex items-center justify-center">
+<div class="hamburger-icon flex flex-col justify-between w-6 h-4 transition-transform duration-300">
+<span class="w-full h-0.5 bg-current transition-all duration-300 origin-left"></span>
+<span class="w-full h-0.5 bg-current transition-all duration-300"></span>
+<span class="w-full h-0.5 bg-current transition-all duration-300 origin-left"></span>
+</div>
+</button>
+</div>
+</div>
+</div>
+<!-- Mobile Drawer -->
+<div id="mobile-drawer" class="fixed inset-0 z-40 lg:hidden pointer-events-none transition-all duration-300 opacity-0">
+<div id="mobile-drawer-backdrop" class="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+<div id="mobile-drawer-content" class="absolute right-0 top-0 bottom-0 w-[300px] max-w-[85vw] bg-surface border-l border-outline-variant/30 flex flex-col p-6 shadow-2xl transition-transform duration-300 translate-x-full">
+<div class="flex justify-between items-center mb-8 border-b border-outline-variant/30 pb-4">
+<span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest font-bold">Menu</span>
+<button id="mobile-drawer-close" aria-label="Close Menu" class="text-secondary hover:text-primary p-2">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<nav class="flex flex-col gap-4 mb-8">
+<a class="font-label-md text-lg text-secondary hover:text-primary hover:bg-surface-container-low px-4 py-2 rounded-md transition-all" href="index.html">Home</a>
+<a class="font-label-md text-lg text-primary border-l-4 border-primary pl-4 py-2 font-bold bg-primary/5" href="healthy-athletes-program.html">Programs</a>
+<a class="font-label-md text-lg text-secondary hover:text-primary hover:bg-surface-container-low px-4 py-2 rounded-md transition-all" href="news-article.html">Stories & News</a>
+<a class="font-label-md text-lg text-secondary hover:text-primary hover:bg-surface-container-low px-4 py-2 rounded-md transition-all" href="contact-us.html">Contact Us</a>
+</nav>
+<div class="flex flex-col gap-6 mt-auto pt-6 border-t border-outline-variant/30">
+<div class="relative w-full">
+<input aria-label="Search" class="w-full bg-surface-container-low border border-outline-variant rounded-lg pl-10 pr-4 py-3 text-on-surface font-body-md placeholder-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Search..." type="text">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">search</span>
+</div>
+<button class="font-label-md text-label-md text-secondary hover:text-primary transition-colors py-2.5 flex items-center justify-center gap-2 border border-outline-variant rounded-lg">
+<span class="material-symbols-outlined text-lg">language</span>
+नेपाली / EN
+</button>
 </div>
 </div>
 </div>
 </header>
 <!-- 2. Breadcrumb -->
-<nav aria-label="Breadcrumb" class="w-full px-margin-desktop py-6 max-w-container-max-width mx-auto">
-<ol class="flex items-center space-x-2 text-label-md font-label-md text-on-secondary-fixed/70">
-<li><a class="hover:text-primary transition-colors" href="#">Home</a></li>
+<nav aria-label="Breadcrumb" class="w-full px-6 lg:px-margin-desktop py-4 sm:py-6 max-w-container-max-width mx-auto">
+<ol class="flex flex-wrap items-center space-x-2 text-label-md font-label-md text-on-secondary-fixed/70">
+<li><a class="hover:text-primary transition-colors" href="index.html">Home</a></li>
 <li><span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span></li>
-<li><a class="hover:text-primary transition-colors" href="#">Programs</a></li>
+<li><a class="hover:text-primary transition-colors" href="healthy-athletes-program.html">Programs</a></li>
 <li><span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span></li>
 <li aria-current="page" class="font-bold text-on-secondary-fixed">Healthy Athletes®</li>
 </ol>
 </nav>
 <!-- 3. Programme Hero -->
-<section class="w-full px-margin-desktop py-12 max-w-container-max-width mx-auto">
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<section class="w-full px-6 lg:px-margin-desktop py-8 sm:py-12 max-w-container-max-width mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-gutter items-center">
 <!-- Content -->
-<div class="lg:col-span-5 z-10">
+<div class="lg:col-span-5 z-10 w-full">
 <p class="font-eyebrow text-eyebrow text-primary uppercase mb-4 tracking-wider">Our Programs</p>
-<h1 class="font-headline-xl text-headline-xl text-on-secondary-fixed mb-6 leading-tight">Healthy Athletes®</h1>
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-secondary-fixed mb-6 leading-tight">Healthy Athletes®</h1>
 <h2 class="font-headline-md text-headline-md text-on-surface-variant mb-6">Supporting health beyond the playing field.</h2>
-<p class="font-body-lg text-body-lg text-on-surface mb-8 max-w-lg">
+<p class="font-body-lg text-body-md md:text-body-lg text-on-surface mb-8 max-w-lg">
                     Healthy Athletes® provides free health screenings, education and referral opportunities for people with intellectual disabilities. We help our athletes stay healthy so they can train, compete and live fuller lives.
                 </p>
-<a class="inline-flex items-center justify-center gap-2 bg-primary text-on-primary font-cta text-cta px-8 py-4 rounded-full hover:-translate-y-1 hover:shadow-lg transition-all duration-300" href="#about">
+<a class="inline-flex items-center justify-center gap-2 bg-primary text-on-primary font-cta text-cta px-8 py-4 rounded-full hover:-translate-y-1 hover:shadow-lg transition-all duration-300 text-sm sm:text-base" href="#about">
                     LEARN MORE ABOUT OUR WORK
                     <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
 </a>
 </div>
 <!-- Image with soft gradient transition -->
-<div class="lg:col-span-7 relative h-[500px] lg:h-[600px] rounded-xl overflow-hidden shadow-sm group">
+<div class="lg:col-span-7 relative h-[300px] sm:h-[450px] lg:h-[600px] rounded-xl overflow-hidden shadow-sm group w-full">
 <!-- Soft white gradient overlay on the left to blend into the white background -->
 <div class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-surface via-surface/70 to-transparent z-10 hidden lg:block"></div>
 <img alt="A Nepali healthcare professional conducting a hearing test for a smiling Special Olympics athlete." class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-in-out" src="https://lh3.googleusercontent.com/aida/AP1WRLuBeOD6dFy5JjSgztdyEVgug18sMxpF2UR5N6JuR2_lzW8LVLe3ml_3DpbYI4dmNd6ZTevEhCDBJjbKyF4xK1xxNLTqNjXQgjdbm1UZgwo3mXu65C1y-_MkECGRBRiG4donO5ssFarWD9XSPcTvk7uS6iq1POKHKAyAUdyJZ8lWSEZecNQ4wlz5q4foTYbbHDAQV4IKDt-YuAfu-XVU7okhCKWFHEue7IrGfP_LkXgZaojFSE1Bo3hLBYM"/>
@@ -177,18 +238,18 @@
 </div>
 </section>
 <!-- 4. About Section -->
-<section class="w-full bg-surface-container-lowest py-section-padding-desktop" id="about">
-<div class="px-margin-desktop max-w-container-max-width mx-auto">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
+<section class="w-full bg-surface-container-lowest py-section-padding-mobile md:py-section-padding-desktop" id="about">
+<div class="px-6 lg:px-margin-desktop max-w-container-max-width mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-gutter items-center">
 <!-- Left: Image -->
-<div class="relative h-[400px] lg:h-[500px] rounded-xl overflow-hidden shadow-sm border border-outline-variant/30">
+<div class="relative h-[250px] sm:h-[400px] lg:h-[500px] rounded-xl overflow-hidden shadow-sm border border-outline-variant/30 w-full">
 <img class="w-full h-full object-cover" data-alt="A compassionate scene showing a Nepali medical professional conducting a basic health screening for a young Special Olympics athlete in a brightly lit, clean medical tent. The professional is smiling warmly, wearing a white coat, while the athlete looks engaged and comfortable. The setting is a daytime outdoor event, with soft, natural lighting creating an optimistic and supportive mood. The color palette features clinical whites mixed with the vibrant red of the Special Olympics branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMMGFMRQyzREX6XWXLjkrIQ0UuyY2jVpxs7sxLO5sklhZgKMik-bfc9R9TOXHhvVMWJsbWh2Us_M2mWgNnRsucXUsFvAuj_4hdfkT9IyC881THdV9wSxBtDIWc9oOCtSCCVbAj1wsBs_50Xwvma7VevoIij4GnOxNclL4fIFmk6p2bDtvtnNwqqJ6i2fmzb4KoNhWt-fFC12hwooLyCL8-ppXcRP11vDBszT58G3BuMPFTrSyG4ZOi"/>
 </div>
 <!-- Right: Content -->
-<div class="lg:pl-12">
+<div class="lg:pl-8 xl:pl-12 w-full">
 <p class="font-eyebrow text-eyebrow text-primary uppercase mb-4 tracking-wider">About The Program</p>
-<h2 class="font-headline-lg text-headline-lg text-on-secondary-fixed mb-8">About Healthy Athletes®</h2>
-<div class="space-y-6 font-body-lg text-body-lg text-on-surface">
+<h2 class="font-headline-lg text-3xl lg:text-headline-lg text-on-secondary-fixed mb-6 md:mb-8">About Healthy Athletes®</h2>
+<div class="space-y-6 font-body-lg text-body-md md:text-body-lg text-on-surface">
 <p class="font-bold text-on-secondary-fixed">
                             Many people with intellectual disabilities face greater health challenges and barriers to care. Healthy Athletes® helps change that.
                         </p>
@@ -204,11 +265,11 @@
 </div>
 </section>
 <!-- 5. Programme Areas -->
-<section class="w-full bg-surface py-section-padding-desktop">
-<div class="px-margin-desktop max-w-container-max-width mx-auto">
-<div class="text-center mb-16 max-w-2xl mx-auto">
+<section class="w-full bg-surface py-section-padding-mobile md:py-section-padding-desktop">
+<div class="px-6 lg:px-margin-desktop max-w-container-max-width mx-auto">
+<div class="text-center mb-10 md:mb-16 max-w-2xl mx-auto">
 <p class="font-eyebrow text-eyebrow text-primary uppercase mb-4 tracking-wider">Our Program Areas</p>
-<h2 class="font-headline-lg text-headline-lg text-on-secondary-fixed">Comprehensive Care</h2>
+<h2 class="font-headline-lg text-3xl lg:text-headline-lg text-on-secondary-fixed">Comprehensive Care</h2>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 <!-- Card 1 -->
@@ -247,19 +308,19 @@
 </div>
 </section>
 <!-- 6. Recent Activities -->
-<section class="w-full bg-surface-container-lowest py-section-padding-desktop border-t border-outline-variant/30">
-<div class="px-margin-desktop max-w-container-max-width mx-auto">
-<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+<section class="w-full bg-surface-container-lowest py-section-padding-mobile md:py-section-padding-desktop border-t border-outline-variant/30">
+<div class="px-6 lg:px-margin-desktop max-w-container-max-width mx-auto">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 md:mb-12 gap-4">
 <div>
 <p class="font-eyebrow text-eyebrow text-primary uppercase mb-4 tracking-wider">Healthy Athletes® In Action</p>
-<h2 class="font-headline-lg text-headline-lg text-on-secondary-fixed">Recent Activities</h2>
+<h2 class="font-headline-lg text-3xl lg:text-headline-lg text-on-secondary-fixed">Recent Activities</h2>
 </div>
 <a class="inline-flex items-center gap-2 font-cta text-cta text-primary hover:text-surface-tint transition-colors group" href="#">
                     VIEW ALL NEWS
                     <span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </a>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-gutter">
 <!-- News Card 1 -->
 <article class="bg-surface rounded-xl overflow-hidden border border-outline-variant/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col">
 <div class="h-56 overflow-hidden">
@@ -321,20 +382,20 @@
 </div>
 </section>
 <!-- 7. Athlete Story -->
-<section class="w-full bg-primary-fixed-dim/20 py-section-padding-desktop">
-<div class="px-margin-desktop max-w-container-max-width mx-auto">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
+<section class="w-full bg-primary-fixed-dim/20 py-section-padding-mobile md:py-section-padding-desktop">
+<div class="px-6 lg:px-margin-desktop max-w-container-max-width mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-gutter items-center">
 <!-- Left: Image -->
-<div class="relative h-[450px] rounded-2xl overflow-hidden shadow-lg border-4 border-surface-container-lowest">
+<div class="relative h-[300px] sm:h-[450px] rounded-2xl overflow-hidden shadow-lg border-4 border-surface-container-lowest w-full">
 <img alt="Close-up portrait of a proud Nepali female athlete, wearing her sports jersey and a gold medal." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLu5DppdKRPzfw6xmH_Q9DaiH0_ZJqFrJnLUMiE6a5qnc9iDi5mK1TD8ZAMR8IfsV6C4DbtlJ5tX-omnCcpYYe3CAjy8cgEwTmAr1i6CDtWEL6oloEbLcpulZaY2RNqVPeB5NW9WFIXvECELB_RxHRrS2ObQVtubKa2egMTEAs8FbMsJhZQMfeNqf9XDXiN20QeZJ4PV0egyz_twJCIviW__cVzq0uNSQ-gs2_NvqITI4tqd6rzZNRyfZ6E"/>
 </div>
 <!-- Right: Quote Content -->
-<div class="lg:pl-12 py-8">
+<div class="lg:pl-8 xl:pl-12 py-4 md:py-8 w-full">
 <p class="font-eyebrow text-eyebrow text-primary uppercase mb-4 tracking-wider">Meet Our Athletes</p>
-<h2 class="font-headline-lg text-headline-lg text-on-secondary-fixed mb-8">Real Stories. Real Impact.</h2>
+<h2 class="font-headline-lg text-3xl lg:text-headline-lg text-on-secondary-fixed mb-6 md:mb-8">Real Stories. Real Impact.</h2>
 <div class="relative">
 <span class="material-symbols-outlined absolute -top-8 -left-6 text-[80px] text-primary/10 select-none icon-fill">format_quote</span>
-<blockquote class="font-headline-md text-headline-md text-on-surface italic leading-relaxed relative z-10">
+<blockquote class="font-headline-md text-xl sm:text-2xl lg:text-headline-md text-on-surface italic leading-relaxed relative z-10">
                             “Thank you to Healthy Athletes® for checking my eyes. Now I can see better and train with more confidence.”
                         </blockquote>
 <div class="mt-8 flex items-center gap-4">
@@ -350,8 +411,8 @@
 </div>
 </section>
 <!-- 8. Optional Gallery -->
-<section class="w-full bg-surface-container-lowest py-20 border-b border-outline-variant/30">
-<div class="px-margin-desktop max-w-container-max-width mx-auto">
+<section class="w-full bg-surface-container-lowest py-12 md:py-20 border-b border-outline-variant/30">
+<div class="px-6 lg:px-margin-desktop max-w-container-max-width mx-auto">
 <div class="text-center mb-10">
 <p class="font-eyebrow text-eyebrow text-on-surface-variant uppercase tracking-wider">Healthy Athletes® In Pictures</p>
 </div>
@@ -372,18 +433,18 @@
 </div>
 </section>
 <!-- 9. Simple Get Involved -->
-<section class="w-full bg-on-secondary-fixed text-on-secondary py-section-padding-desktop relative overflow-hidden">
+<section class="w-full bg-on-secondary-fixed text-on-secondary py-section-padding-mobile md:py-section-padding-desktop relative overflow-hidden">
 <!-- Subtle decorative element -->
 <div class="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-<div class="px-margin-desktop max-w-container-max-width mx-auto relative z-10">
-<div class="text-center max-w-3xl mx-auto mb-16">
-<h2 class="font-headline-xl text-headline-xl mb-6">Be Part of the Movement</h2>
-<p class="font-body-lg text-body-lg text-on-secondary/80">
+<div class="px-6 lg:px-margin-desktop max-w-container-max-width mx-auto relative z-10">
+<div class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+<h2 class="font-headline-xl text-3xl md:text-headline-xl mb-6">Be Part of the Movement</h2>
+<p class="font-body-lg text-body-md md:text-body-lg text-on-secondary/80">
                     Your time, skills and support can help create a healthier and more inclusive future for our athletes. Join the Healthy Athletes® program today.
                 </p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-<a class="bg-secondary-fixed-variant/20 border border-secondary-fixed/20 p-8 rounded-xl flex flex-col items-center text-center hover:bg-secondary-fixed-variant/40 hover:-translate-y-1 transition-all duration-300" href="#">
+<a class="bg-secondary-fixed-variant/20 border border-secondary-fixed/20 p-6 sm:p-8 rounded-xl flex flex-col items-center text-center hover:bg-secondary-fixed-variant/40 hover:-translate-y-1 transition-all duration-300" href="#">
 <span class="material-symbols-outlined text-[40px] text-primary-fixed mb-4">volunteer_activism</span>
 <h3 class="font-headline-md text-headline-md mb-2">Volunteer</h3>
 <p class="font-body-md text-body-md text-on-secondary/70">Medical professionals and general volunteers needed.</p>
@@ -402,10 +463,10 @@
 </div>
 </section>
 <!-- 10. Related Programmes -->
-<section class="w-full bg-surface py-20 border-b border-surface-variant">
-<div class="px-margin-desktop max-w-container-max-width mx-auto text-center">
-<h2 class="font-headline-md text-headline-md text-on-surface-variant mb-8">Explore More Programmes</h2>
-<div class="flex flex-wrap justify-center gap-x-12 gap-y-6">
+<section class="w-full bg-surface py-12 md:py-20 border-b border-surface-variant">
+<div class="px-6 lg:px-margin-desktop max-w-container-max-width mx-auto text-center">
+<h2 class="font-headline-md text-headline-md text-on-surface-variant mb-6 md:mb-8">Explore More Programmes</h2>
+<div class="flex flex-wrap justify-center gap-x-8 lg:gap-x-12 gap-y-4 sm:gap-y-6">
 <a class="inline-flex items-center gap-2 font-headline-md text-headline-md text-on-secondary-fixed hover:text-primary transition-colors group" href="#">
                     Sports
                     <span class="material-symbols-outlined text-[24px] text-primary opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300">arrow_forward</span>
@@ -423,21 +484,21 @@
 </section>
 <!-- Footer -->
 <footer class="bg-[#001847] border-t border-outline-variant/20 w-full bottom-0 text-white">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 px-margin-desktop py-section-padding-desktop max-w-container-max-width mx-auto">
-<div class="lg:col-span-2 pr-8">
-<a class="flex items-center gap-4 mb-8 w-56 h-auto brightness-0 invert" href="index.html">
-    <img alt="Special Olympics Nepal" class="h-10 md:h-12 w-auto object-contain" src="assets/images/logo_special_olympics.svg"/>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-16 px-6 lg:px-margin-desktop py-section-padding-mobile md:py-section-padding-desktop max-w-container-max-width mx-auto">
+<div class="lg:col-span-2 pr-0 lg:pr-8">
+<a class="flex items-center gap-4 mb-6 md:mb-8 w-56 h-auto brightness-0 invert" href="index.html">
+    <img alt="Special Olympics Nepal" class="h-9 sm:h-10 md:h-12 w-auto object-contain" src="assets/images/logo_special_olympics.svg"/>
 </a>
-<p class="font-body-lg text-surface-variant/80 mb-10 max-w-md leading-relaxed">Creating a world of inclusion through the power of sports for people with intellectual disabilities across Nepal.</p>
+<p class="font-body-lg text-surface-variant/80 mb-8 md:mb-10 max-w-md leading-relaxed">Creating a world of inclusion through the power of sports for people with intellectual disabilities across Nepal.</p>
 <div class="flex gap-4">
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">public</span></a>
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">photo_camera</span></a>
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">video_library</span></a>
+<a aria-label="Website" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">public</span></a>
+<a aria-label="Instagram" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">photo_camera</span></a>
+<a aria-label="YouTube" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all duration-300" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">video_library</span></a>
 </div>
 </div>
 <div>
-<h4 class="font-label-md text-lg text-white font-bold mb-8 uppercase tracking-widest opacity-90">What We Do</h4>
-<ul class="space-y-5">
+<h4 class="font-label-md text-lg text-white font-bold mb-6 md:mb-8 uppercase tracking-widest opacity-90">What We Do</h4>
+<ul class="space-y-4 md:space-y-5">
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="healthy-athletes-program.html">Healthy Athletes®</a></li>
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="index.html#programs">Programs</a></li>
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="index.html#sports">Sports</a></li>
@@ -445,8 +506,8 @@
 </ul>
 </div>
 <div>
-<h4 class="font-label-md text-lg text-white font-bold mb-8 uppercase tracking-widest opacity-90">Get Involved</h4>
-<ul class="space-y-5">
+<h4 class="font-label-md text-lg text-white font-bold mb-6 md:mb-8 uppercase tracking-widest opacity-90">Get Involved</h4>
+<ul class="space-y-4 md:space-y-5">
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="contact-us.html">Volunteer</a></li>
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="contact-us.html">Donate</a></li>
 <li class=""><a class="font-body-lg text-surface-variant/80 hover:text-primary-fixed-dim transition-colors" href="contact-us.html">Fundraise</a></li>
@@ -454,21 +515,60 @@
 </ul>
 </div>
 <div>
-<h4 class="font-label-md text-lg text-white font-bold mb-8 uppercase tracking-widest opacity-90">Stay Connected</h4>
-<form class="flex flex-col gap-5">
+<h4 class="font-label-md text-lg text-white font-bold mb-6 md:mb-8 uppercase tracking-widest opacity-90">Stay Connected</h4>
+<form class="flex flex-col gap-4 md:gap-5">
 <input aria-label="Email Address" class="bg-white/10 border border-white/20 rounded-lg px-5 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-lg w-full transition-all" placeholder="Enter your email" type="email">
 <button class="bg-[#bb0027] hover:bg-[#e51937] text-white font-cta text-lg px-8 py-4 rounded-lg transition-colors uppercase tracking-widest text-center w-full font-bold shadow-md" type="submit">SUBSCRIBE</button>
 </form>
 </div>
 </div>
-<div class="bg-black/20 py-8 px-margin-desktop border-t border-white/10">
+<div class="bg-black/20 py-6 md:py-8 px-6 lg:px-margin-desktop border-t border-white/10">
 <div class="max-w-container-max-width mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-<p class="font-body-md text-surface-variant/60">© 2025 Special Olympics Nepal. All rights reserved.</p>
-<div class="flex gap-10">
+<p class="font-body-md text-surface-variant/60 text-center md:text-left">© 2025 Special Olympics Nepal. All rights reserved.</p>
+<div class="flex gap-6 md:gap-10">
 <a class="font-body-md text-surface-variant/60 hover:text-white transition-colors" href="#">Privacy Policy</a>
 <a class="font-body-md text-surface-variant/60 hover:text-white transition-colors" href="#">Terms of Use</a>
 </div>
 </div>
 </div>
 </footer>
+
+<script>
+    // Mobile Drawer Controller
+    const trigger = document.getElementById('mobile-menu-trigger');
+    const drawer = document.getElementById('mobile-drawer');
+    const backdrop = document.getElementById('mobile-drawer-backdrop');
+    const content = document.getElementById('mobile-drawer-content');
+    const closeBtn = document.getElementById('mobile-drawer-close');
+    const hamburger = trigger.querySelector('.hamburger-icon');
+
+    function openMenu() {
+        drawer.classList.remove('pointer-events-none');
+        drawer.classList.add('opacity-100');
+        backdrop.classList.add('opacity-100');
+        content.classList.remove('translate-x-full');
+        hamburger.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        drawer.classList.add('pointer-events-none');
+        drawer.classList.remove('opacity-100');
+        backdrop.classList.remove('opacity-100');
+        content.classList.add('translate-x-full');
+        hamburger.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    trigger.addEventListener('click', () => {
+        if (hamburger.classList.contains('open')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    closeBtn.addEventListener('click', closeMenu);
+    backdrop.addEventListener('click', closeMenu);
+</script>
 </body></html>
